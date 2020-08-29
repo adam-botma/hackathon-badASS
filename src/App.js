@@ -18,6 +18,7 @@ class App extends React.Component {
     this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
     this.editTask = this.editTask.bind(this);
     this.editContent = this.editContent.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   onDragEnd = (result) => {
@@ -158,6 +159,40 @@ class App extends React.Component {
     }))
   }
 
+  deleteTask(id, column){
+    let currentTasks = Object.assign({}, this.state.tasks);
+    delete currentTasks[id];
+
+    const columnTasks = Array.from(this.state.columns[column].taskIds);
+
+    const indexToDelete = columnTasks.indexOf(id);
+    columnTasks.splice(indexToDelete, 1)
+
+
+    const updatedState = {
+      ...this.state,
+      tasks: currentTasks,
+      columns: {
+        ...this.state.columns,
+        [column]: {
+          ...this.state.columns[column],
+          taskIds: columnTasks
+        }
+      }
+    }
+    console.log(this.state)
+    console.log(updatedState)
+
+    this.setState(updatedState);
+
+
+    }
+
+
+
+
+
+
   toggleFormVisibility() {
     if (this.state.formVisibility === "hidden") {
       this.setState({ formVisibility: "visible" });
@@ -192,6 +227,7 @@ class App extends React.Component {
 
                   return (
                     <KanbanColumn
+                      deleteTask={this.deleteTask}
                       editTask={this.editTask}
                       editContent={this.editContent}
                       key={column.id}

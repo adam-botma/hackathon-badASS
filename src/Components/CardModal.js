@@ -76,7 +76,7 @@ export default function SimpleModal(props) {
           }}
         />
       </form>
-      <DeleteOutlineIcon />
+      <DeleteOutlineIcon onClick={()=> props.deleteTask(props.task.id, props.currentColumn)}/>
     </div>
   );
 

@@ -7,23 +7,23 @@ const initialData = {
   },
 
   columns: {
-    open: {
-      id: 'open',
+    'column-1': {
+      id: 'column-1',
       title: 'open',
       taskIds: ['task-1', 'task-2', 'task-3', 'task-4',],
     },
-    pending: {
-      id: 'pending',
+    'column-2': {
+      id: 'column-2',
       title: 'pending',
       taskIds: [],
     },
-    complete: {
-      id: 'complete',
+    'column-3': {
+      id: 'column-3',
       title: 'complete',
       taskIds: [],
     }
   },
-  columnOrder: ['open', 'pending', 'complete']
+  columnOrder: ['column-1', 'column-2', 'column-3']
 };
 
 export default initialData;

@@ -22,7 +22,7 @@ export default function KanbanColumn(props) {
                 {...provided.droppableProps}
               >
                 {props.tasks.map((task, index) => (
-                  <CardModal editTask={props.editTask} editContent={props.editContent} key={task.id} task={task} index={index} />
+                  <CardModal deleteTask={props.deleteTask}editTask={props.editTask} currentColumn={props.column.id} editContent={props.editContent} key={task.id} task={task} index={index} />
                 ))}
                 {provided.placeholder}
               </div>
