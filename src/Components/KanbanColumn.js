@@ -1,5 +1,6 @@
 import React from "react";
 import CardModal from "./CardModal";
+import { Droppable } from 'react-beautiful-dnd';
 
 export default function KanbanColumn(props) {
   return (
@@ -7,9 +8,14 @@ export default function KanbanColumn(props) {
       <div className="column-title">
         <h2>{props.column.title}</h2>
       </div>
-      <div className="column-contents">
-        { props.tasks.map(task => <CardModal key={task.id} task={task}/>) }
-      </div>
+      <Droppable droppableId={props.column.id}>
+        {(provided)=>(
+          <div className="column-contents" ref={provided.innerRef} {...provided.droppableProps} >
+            {props.tasks.map((task, index) => <CardModal key={task.id} task={task} index={index} />)}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 }

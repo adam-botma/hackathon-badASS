@@ -2,7 +2,8 @@ import React from "react";
 import "./App.css";
 import KanbanColumn from "./Components/KanbanColumn.js";
 import Header from "./Components/Header";
-import initialData from './data/dummy-data'
+import initialData from './data/dummy-data';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 
 class App extends React.Component {
@@ -11,17 +12,23 @@ class App extends React.Component {
     this.state = initialData;
   }
 
+  onDragEnd = result => {
+
+  }
+
   render() {
     return (
       <div>
         <Header />
         <div className="column-container">
-         {this.state.columnOrder.map(columnId => {
-           const column = this.state.columns[columnId];
-           const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            {this.state.columnOrder.map(columnId => {
+              const column = this.state.columns[columnId];
+              const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
-          return <KanbanColumn key={column.id} column={column} tasks={tasks}/>;
-         })}
+              return <KanbanColumn key={column.id} column={column} tasks={tasks}/>;
+            })}
+          </DragDropContext>
         </div>
       </div>
     );
