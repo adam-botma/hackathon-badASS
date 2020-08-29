@@ -25,6 +25,15 @@ export default function KanbanColumn(props) {
                   <CardModal key={task.id} task={task} index={index} />
                 ))}
                 {provided.placeholder}
+                <div className="task-btn-container">
+                  <button
+                    onClick={props.addTask}
+                    className="add-task-btn"
+                    id={props.id}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             )}
           </Droppable>

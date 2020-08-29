@@ -4,6 +4,28 @@ import Header from "./Components/Header";
 import initialData from "./data/dummy-data";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import KanbanColumn from "./Components/KanbanColumn";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import TextField from "@material-ui/core/TextField";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    borderRadius: 8,
+    padding: 32,
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  },
+  root: {
+    width: "100%",
+    paddingBottom: 16,
+  },
+}));
 
 class App extends React.Component {
   constructor(props) {
@@ -12,10 +34,13 @@ class App extends React.Component {
       ...initialData,
       newColumn: "",
       formVisibility: "hidden",
+      newTaskVisibility: "none",
     };
     this.addColumn = this.addColumn.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
+    this.addTask = this.addTask.bind(this);
+    this.newTaskModal = this.newTaskModal.bind(this);
   }
 
   onDragEnd = (result) => {
@@ -104,7 +129,7 @@ class App extends React.Component {
 
   addColumn(event) {
     event.preventDefault();
-    const { columnOrder, columns, newColumn } = this.state;
+    const { columnOrder, newColumn } = this.state;
 
     //Addint to columnOrder
     let newColumnOrder = columnOrder.slice();
@@ -112,7 +137,7 @@ class App extends React.Component {
 
     //Adding to columns
 
-    this.setState( state => ({
+    this.setState((state) => ({
       ...state,
       columns: {
         ...state.columns,
@@ -120,12 +145,14 @@ class App extends React.Component {
           id: newColumn,
           title: newColumn,
           taskIds: [],
-        }
+        },
       },
       columnOrder: newColumnOrder,
     }));
+  }
 
-    console.log(this.state.columns, this.state.columnOrder);
+  addTask(event) {
+    console.log(event.target.id);
   }
 
   toggleFormVisibility() {
@@ -136,6 +163,33 @@ class App extends React.Component {
     }
   }
 
+  newTaskModal() {
+    const classes = useStyles();
+    return (
+      <div className={(classes.paper, this.state.newTaskVisibility)}>
+        <form className={classes.root} noValidate autoComplete="off">
+          <div>
+            <TextField
+              className={classes.root}
+              id="outlined-basic"
+              label="Insert Title"
+              variant="outlined"
+            />
+          </div>
+          <div></div>
+          <TextField
+            className={classes.root}
+            id="outlined-multiline-static"
+            label="Multiline"
+            multiline
+            rows={4}
+            variant="outlined"
+          />
+        </form>
+        <DeleteOutlineIcon />
+      </div>
+    );
+  }
   render() {
     const { formVisibility } = this.state;
     let addButton = "+";
@@ -162,10 +216,12 @@ class App extends React.Component {
 
                   return (
                     <KanbanColumn
+                      id={column.id}
                       key={column.id}
                       column={column}
                       tasks={tasks}
                       index={index}
+                      addTask={this.addTask}
                     />
                   );
                 })}
@@ -198,6 +254,7 @@ class App extends React.Component {
             )}
           </Droppable>
         </DragDropContext>
+        <this.newTaskModal />
       </div>
     );
   }
