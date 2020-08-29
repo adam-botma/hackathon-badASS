@@ -1,24 +1,28 @@
+body {
+  font-family: Lato;
+}
+
 header {
-  background-color: lightcoral;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 70px;
 }
 
 .project-name,
 .column-name {
-  position: relative;
-  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.project-name h2 {
+  padding: 0 1rem;
 }
 
 .edit-project-name,
 .edit-column-name {
-  position: absolute;
-  top: 20px;
-  right: 5px;
   display: none;
-  height: 50%;
   cursor: pointer;
 }
 
@@ -49,6 +53,7 @@ header {
 .column {
   flex: 0 0 auto;
   border: 1px solid lightgray;
+  background-color: white;
   width: 355px;
   height: 98%;
   margin: 0.5%;
@@ -66,6 +71,8 @@ header {
   background-color: lightgrey;
   height: 10%;
   padding: 0 30px;
+  text-transform: capitalize;
+  font-weight: 700;
 }
 
 .modal {
