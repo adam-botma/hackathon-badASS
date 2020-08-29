@@ -11,7 +11,7 @@ export default function KanbanColumn(props) {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <div className="column-title" {...provided.dragHandleProps}>
+          <div className="column-name-container" {...provided.dragHandleProps}>
             <h2>{props.column.title}</h2>
           </div>
           <Droppable droppableId={props.column.id} type="task">
@@ -22,9 +22,27 @@ export default function KanbanColumn(props) {
                 {...provided.droppableProps}
               >
                 {props.tasks.map((task, index) => (
-                  <CardModal deleteTask={props.deleteTask}editTask={props.editTask} currentColumn={props.column.id} editContent={props.editContent} key={task.id} task={task} index={index} />
+
+                  <CardModal deleteTask={props.deleteTask}
+                             editTask={props.editTask} 
+                             currentColumn={props.column.id} 
+                             editContent={props.editContent} 
+                             key={task.id} 
+                             task={task} 
+                             index={index} 
+                   />
+
                 ))}
                 {provided.placeholder}
+                <div className="task-btn-container">
+                  <button
+                    onClick={props.toggleNewTask}
+                    className="add-task-btn"
+                    id={props.id}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             )}
           </Droppable>
