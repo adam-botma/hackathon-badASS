@@ -3,7 +3,7 @@ import React from "react";
 export default function Header() {
   return (
     <header>
-      <h1>BadAss KanBan</h1>
+      <h2>BadAss KanBan</h2>
     </header>
   );
 }

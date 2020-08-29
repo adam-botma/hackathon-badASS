@@ -8,7 +8,11 @@ function App() {
   return (
     <div>
       <Header />
-      <KanbanColumn />
+      <div className="column-container">
+        <KanbanColumn />
+        <KanbanColumn />
+        <KanbanColumn />
+      </div>
     </div>
   );
 }

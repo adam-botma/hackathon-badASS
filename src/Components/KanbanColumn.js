@@ -4,24 +4,29 @@ import KanbanCard from "./KanbanCard";
 export default function KanbanColumn() {
   return (
     <div className="column">
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
+      <div className="column-title">
+        <h2>Open</h2>
+      </div>
+      <div className="column-contents">
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+        <KanbanCard />
+      </div>
     </div>
   );
 }

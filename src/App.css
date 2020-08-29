@@ -5,12 +5,26 @@
   margin: 0.5rem;
 }
 
+.column-container {
+  display: flex;
+}
 .column {
   border: 1px solid lightgray;
   max-width: 355px;
   height: 90vh;
   margin: 0.5%;
+}
+
+.column-contents {
+  height: 90%;
   overflow: auto;
+}
+.column-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgrey;
+  height: 10%;
 }
 
 header {
