@@ -164,10 +164,8 @@ class App extends React.Component {
     delete currentTasks[id];
 
     const columnTasks = Array.from(this.state.columns[column].taskIds);
-
     const indexToDelete = columnTasks.indexOf(id);
     columnTasks.splice(indexToDelete, 1)
-
 
     const updatedState = {
       ...this.state,
@@ -180,18 +178,9 @@ class App extends React.Component {
         }
       }
     }
-    console.log(this.state)
-    console.log(updatedState)
 
     this.setState(updatedState);
-
-
     }
-
-
-
-
-
 
   toggleFormVisibility() {
     if (this.state.formVisibility === "hidden") {
