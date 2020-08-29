@@ -3,7 +3,7 @@ import "./App.css";
 import KanbanColumn from "./Components/KanbanColumn.js";
 import Header from "./Components/Header";
 import initialData from './data/dummy-data';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 
 class App extends React.Component {
@@ -13,22 +13,35 @@ class App extends React.Component {
   }
 
   onDragEnd = result => {
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
 
-    if(!destination){
+    if (!destination) {
       return;
     }
 
-    if(destination.droppableId === source.droppableId &&
-      destination.index === source.index){
-        return;
-      }
+    if (destination.droppableId === source.droppableId &&
+      destination.index === source.index) {
+      return;
+    }
+
+    if(type=== 'column'){
+      const newColumnOrder = Array.from(this.state.columnOrder);
+      newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, draggableId);
+
+      const newState= {
+        ...this.state,
+        columnOrder: newColumnOrder
+      };
+      this.setState(newState);
+      return;
+    }
 
     const start = this.state.columns[source.droppableId];
     const finish = this.state.columns[destination.droppableId];
 
     // Moving tasks within the same column
-    if(start === finish){
+    if (start === finish) {
 
       const newTaskIds = Array.from(start.taskIds);
       newTaskIds.splice(source.index, 1);
@@ -74,23 +87,30 @@ class App extends React.Component {
         [newFinish.id]: newFinish,
       }
     }
-  this.setState(newState);
+    this.setState(newState);
   };
 
   render() {
     return (
       <div>
         <Header />
-        <div className="column-container">
-          <DragDropContext onDragEnd={this.onDragEnd}>
-            {this.state.columnOrder.map(columnId => {
-              const column = this.state.columns[columnId];
-              const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId='columns' direction='horizontal' type='column'>
+            {provided => (
+              <div className="column-container" {...provided.droppableProps} ref={provided.innerRef}>
 
-              return <KanbanColumn key={column.id} column={column} tasks={tasks}/>;
-            })}
-          </DragDropContext>
-        </div>
+                {this.state.columnOrder.map((columnId, index) => {
+                  const column = this.state.columns[columnId];
+                  const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+
+                  return <KanbanColumn key={column.id} column={column} tasks={tasks} index={index} />;
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+
       </div>
     );
   }
