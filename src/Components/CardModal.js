@@ -2,9 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import KanbanCard from "./KanbanCard";
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable } from "react-beautiful-dnd";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -14,14 +14,14 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     borderRadius: 8,
     padding: 32,
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
   },
   root: {
     width: "100%",
-    paddingBottom: 16
-  }
+    paddingBottom: 16,
+  },
 }));
 
 export default function SimpleModal(props) {
@@ -30,9 +30,9 @@ export default function SimpleModal(props) {
 
   const [open, setOpen] = React.useState(false);
 
-  console.log(props.title)
+  // console.log(props.title)
 
-  const [title, setTitle] = React.useState(props.title)
+  const [title, setTitle] = React.useState(props.title);
 
   const handleOpen = () => {
     setOpen(true);
@@ -52,8 +52,8 @@ export default function SimpleModal(props) {
             label="Insert Title"
             variant="outlined"
             defaultValue={title}
-            onChange={event => {
-              setTitle(event.target.value)
+            onChange={(event) => {
+              setTitle(event.target.value);
             }}
           />
         </div>
@@ -73,9 +73,13 @@ export default function SimpleModal(props) {
 
   return (
     <Draggable draggableId={props.task.id} index={props.index}>
-      {(provided)=>(
-        <div {... provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
-          < KanbanCard handleOpen={handleOpen} title={props.task.title} />
+      {(provided) => (
+        <div
+          {...provided.dragHandleProps}
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+        >
+          <KanbanCard handleOpen={handleOpen} title={props.task.title} />
           <Modal
             open={open}
             onClose={handleClose}
@@ -86,7 +90,6 @@ export default function SimpleModal(props) {
           </Modal>
         </div>
       )}
-
     </Draggable>
   );
 }
