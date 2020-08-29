@@ -104,7 +104,25 @@ class App extends React.Component {
 
   addColumn(event) {
     event.preventDefault();
-    console.log("hi");
+    const { columnOrder, columns, newColumn } = this.state;
+
+    //Addint to columnOrder
+    let newColumnOrder = columnOrder.slice();
+    newColumnOrder.push(newColumn);
+
+    //Adding to columns
+    let newColumnObject = (columns[newColumn] = {
+      id: newColumn,
+      title: newColumn,
+      taskIds: [],
+    });
+
+    this.setState({
+      columns: newColumnObject,
+      columnOrder: newColumnOrder,
+    });
+
+    console.log(this.state.columns, this.state.columnOrder);
   }
 
   toggleFormVisibility() {
