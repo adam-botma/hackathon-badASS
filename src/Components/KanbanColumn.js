@@ -11,7 +11,7 @@ export default function KanbanColumn(props) {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <div className="column-title" {...provided.dragHandleProps}>
+          <div className="column-name-container" {...provided.dragHandleProps}>
             <h2>{props.column.title}</h2>
           </div>
           <Droppable droppableId={props.column.id} type="task">
