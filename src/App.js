@@ -1,18 +1,13 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import KanbanColumn from "./Components/KanbanColumn.js";
 import Header from "./Components/Header";
+import KanbanBody from "./Components/KanbanBody";
 
 function App() {
   return (
     <div>
       <Header />
-      <div className="column-container">
-        <KanbanColumn />
-        <KanbanColumn />
-        <KanbanColumn />
-      </div>
+      <KanbanBody />
     </div>
   );
 }
