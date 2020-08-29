@@ -23,11 +23,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
 
   const [open, setOpen] = React.useState(false);
+
+  console.log(props.title)
+
+  const [title, setTitle] = React.useState(props.title)
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,6 +50,10 @@ export default function SimpleModal() {
             id="outlined-basic"
             label="Insert Title"
             variant="outlined"
+            defaultValue={title}
+            onChange={event => {
+              setTitle(event.target.value)
+            }}
           />
         </div>
         <div></div>
@@ -64,7 +72,7 @@ export default function SimpleModal() {
 
   return (
     <div>
-      < KanbanCard handleOpen={handleOpen} />
+      < KanbanCard handleOpen={handleOpen} header={title} />
       <Modal
         open={open}
         onClose={handleClose}
