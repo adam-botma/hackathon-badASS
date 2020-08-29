@@ -30,6 +30,10 @@ export default function SimpleModal(props) {
 
   const [open, setOpen] = React.useState(false);
 
+  console.log(props.title)
+
+  const [title, setTitle] = React.useState(props.title)
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -47,6 +51,10 @@ export default function SimpleModal(props) {
             id="outlined-basic"
             label="Insert Title"
             variant="outlined"
+            defaultValue={title}
+            onChange={event => {
+              setTitle(event.target.value)
+            }}
           />
         </div>
         <div></div>
