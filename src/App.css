@@ -41,9 +41,13 @@ header {
 .column-container {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   height: calc(99vh - 70px);
 }
+
 .column {
+  flex: 0 0 auto;
   border: 1px solid lightgray;
   width: 355px;
   height: 98%;

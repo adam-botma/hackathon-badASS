@@ -22,9 +22,13 @@ export default class KanbanBody extends React.Component {
   addColumn(event) {
     event.preventDefault();
     const { name, newColumn } = this.state;
-    let updatedColumns = name.push(newColumn);
-    this.setState({ name: updatedColumns });
-    console.log(this.state.name);
+    let updatedColumns = name.slice();
+    updatedColumns.push(newColumn);
+    this.setState({
+      name: updatedColumns,
+      newColumn: "",
+    });
+    this.toggleFormVisibility();
   }
 
   toggleFormVisibility() {
