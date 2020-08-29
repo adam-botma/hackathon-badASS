@@ -4,6 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import KanbanCard from "./KanbanCard";
+import { Draggable } from 'react-beautiful-dnd';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,16 +72,21 @@ export default function SimpleModal(props) {
   );
 
   return (
-    <div>
-      < KanbanCard handleOpen={handleOpen} header={title} />
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-    </div>
+    <Draggable draggableId={props.task.id} index={props.index}>
+      {(provided)=>(
+        <div {... provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
+          < KanbanCard handleOpen={handleOpen} title={props.task.title} />
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {body}
+          </Modal>
+        </div>
+      )}
+
+    </Draggable>
   );
 }

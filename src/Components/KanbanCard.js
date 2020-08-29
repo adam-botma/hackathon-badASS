@@ -5,7 +5,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 export default function KanbanCard(props) {
   return (
     <Card className="card" variant="outlined" onClick={props.handleOpen}>
-      <CardHeader title={props.header} />
+      <CardHeader title={props.title} />
     </Card>
   );
 }
