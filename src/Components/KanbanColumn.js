@@ -1,5 +1,5 @@
 import React from "react";
-import KanbanCard from "./KanbanCard";
+import CardModal from "./CardModal";
 
 export default function KanbanColumn() {
   return (
@@ -8,24 +8,24 @@ export default function KanbanColumn() {
         <h2>Open</h2>
       </div>
       <div className="column-contents">
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
-        <KanbanCard />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
+        < CardModal />
       </div>
     </div>
   );
