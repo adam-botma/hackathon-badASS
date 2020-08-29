@@ -4,6 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import KanbanCard from "./KanbanCard";
+import { Draggable } from 'react-beautiful-dnd';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -23,11 +24,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
 
   const [open, setOpen] = React.useState(false);
+
+  console.log(props.title)
+
+  const [title, setTitle] = React.useState(props.title)
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,6 +51,10 @@ export default function SimpleModal() {
             id="outlined-basic"
             label="Insert Title"
             variant="outlined"
+            defaultValue={title}
+            onChange={event => {
+              setTitle(event.target.value)
+            }}
           />
         </div>
         <div></div>
@@ -63,16 +72,21 @@ export default function SimpleModal() {
   );
 
   return (
-    <div>
-      < KanbanCard handleOpen={handleOpen} />
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-    </div>
+    <Draggable draggableId={props.task.id} index={props.index}>
+      {(provided)=>(
+        <div {... provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
+          < KanbanCard handleOpen={handleOpen} title={props.task.title} />
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {body}
+          </Modal>
+        </div>
+      )}
+
+    </Draggable>
   );
 }
