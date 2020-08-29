@@ -16,6 +16,8 @@ class App extends React.Component {
     this.addColumn = this.addColumn.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
+    this.editTask = this.editTask.bind(this);
+    this.editContent = this.editContent.bind(this);
   }
 
   onDragEnd = (result) => {
@@ -128,6 +130,34 @@ class App extends React.Component {
     console.log(this.state.columns, this.state.columnOrder);
   }
 
+  editTask(id, newTask) {
+    this.setState(state => ({
+      ...state,
+      tasks: {
+        ...state.tasks,
+        [id]: {
+          ...state.tasks[id],
+          title: newTask
+        }
+      }
+    }))
+  }
+
+  editContent(id, newContent) {
+    console.log('im running')
+
+    this.setState(state => ({
+      ...state,
+      tasks: {
+        ...state.tasks,
+        [id]: {
+          ...state.tasks[id],
+          content: newContent
+        }
+      }
+    }))
+  }
+
   toggleFormVisibility() {
     if (this.state.formVisibility === "hidden") {
       this.setState({ formVisibility: "visible" });
@@ -162,6 +192,8 @@ class App extends React.Component {
 
                   return (
                     <KanbanColumn
+                      editTask={this.editTask}
+                      editContent={this.editContent}
                       key={column.id}
                       column={column}
                       tasks={tasks}
