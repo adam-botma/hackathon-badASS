@@ -1,3 +1,32 @@
+header {
+  background-color: lightcoral;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+}
+
+.project-name,
+.column-name {
+  position: relative;
+  padding: 0 30px;
+}
+
+.edit-project-name,
+.edit-column-name {
+  position: absolute;
+  top: 20px;
+  right: 5px;
+  display: none;
+  height: 50%;
+  cursor: pointer;
+}
+
+.project-name:hover .edit-project-name,
+.column-name:hover .edit-column-name {
+  display: block;
+}
+
 .card {
   max-width: 345px;
   box-shadow: "0 0 5px rgba(0, 0, 0, 0.15)";
@@ -5,34 +34,33 @@
   margin: 0.5rem;
 }
 
+.card:hover {
+  cursor: pointer;
+}
+
 .column-container {
   display: flex;
+  height: calc(99vh - 70px);
 }
 .column {
   border: 1px solid lightgray;
   max-width: 355px;
-  height: 90vh;
-  margin: 0.5vh 5px;
+  height: 98%;
+  margin: 0.5%;
 }
 
 .column-contents {
   height: 90%;
   overflow: auto;
 }
-.column-title {
+
+.column-name-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: lightgrey;
   height: 10%;
-}
-
-header {
-  background-color: lightcoral;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 8vh;
+  padding: 0 30px;
 }
 
 .modal {
