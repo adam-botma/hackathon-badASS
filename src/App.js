@@ -111,16 +111,19 @@ class App extends React.Component {
     newColumnOrder.push(newColumn);
 
     //Adding to columns
-    let newColumnObject = (columns[newColumn] = {
-      id: newColumn,
-      title: newColumn,
-      taskIds: [],
-    });
 
-    this.setState({
-      columns: newColumnObject,
+    this.setState( state => ({
+      ...state,
+      columns: {
+        ...state.columns,
+        [newColumn]: {
+          id: newColumn,
+          title: newColumn,
+          taskIds: [],
+        }
+      },
       columnOrder: newColumnOrder,
-    });
+    }));
 
     console.log(this.state.columns, this.state.columnOrder);
   }
