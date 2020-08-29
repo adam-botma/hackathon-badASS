@@ -20,15 +20,21 @@ header {
   padding: 0 1rem;
 }
 
-.edit-project-name,
-.edit-column-name {
+.edit-project-name {
   display: none;
   cursor: pointer;
+}
+
+.edit-column-name {
+  visibility: hidden;
+  cursor: pointer;
+  padding: 1rem;
 }
 
 .project-name:hover .edit-project-name,
 .column-name:hover .edit-column-name {
   display: block;
+  visibility: visible;
 }
 
 .card {
@@ -66,13 +72,22 @@ header {
 
 .column-name-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   background-color: lightgrey;
   height: 10%;
   padding: 0 30px;
   text-transform: capitalize;
   font-weight: 700;
+}
+
+.edit-column-form,
+.edit-project-form {
+  display: flex;
+}
+
+.edit-column-button,
+.edit-project-button {
+  margin-left: 0.5rem;
 }
 
 .modal {

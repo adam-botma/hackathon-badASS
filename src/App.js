@@ -45,6 +45,8 @@ class App extends React.Component {
     this.newTaskModal = this.newTaskModal.bind(this);
     this.editTask = this.editTask.bind(this);
     this.editContent = this.editContent.bind(this);
+    this.editColumn = this.editColumn.bind(this);
+    this.editProject = this.editProject.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.taskNameChange = this.taskNameChange.bind(this);
     this.taskDescriptionChange = this.taskDescriptionChange.bind(this);
@@ -228,8 +230,6 @@ class App extends React.Component {
   }
 
   editContent(id, newContent) {
-    console.log("im running");
-
     this.setState((state) => ({
       ...state,
       tasks: {
@@ -240,6 +240,27 @@ class App extends React.Component {
         },
       },
     }));
+  }
+
+  editColumn(id, columnName) {
+    this.setState(state => ({
+      ...state,
+      columns: {
+        ...state.columns,
+        [id]: {
+          ...state.columns[id],
+          id: columnName,
+          title: columnName
+        }
+      }
+    }))
+  }
+
+  editProject(projectName) {
+    this.setState(state => ({
+      ...state,
+      project: projectName
+    }))
   }
 
   deleteTask(id, column){
@@ -328,7 +349,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header />
+        <Header project={this.state.project} editProject={this.editProject} />
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="columns" direction="horizontal" type="column">
             {(provided) => (
@@ -348,8 +369,10 @@ class App extends React.Component {
                       deleteTask={this.deleteTask}
                       id={column.id}
                       editTask={this.editTask}
+                      editColumn={this.editColumn}
                       editContent={this.editContent}
-                      key={column.id}
+                      key={columnId}
+                      id={columnId}
                       column={column}
                       tasks={tasks}
                       index={index}
