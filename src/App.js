@@ -5,7 +5,6 @@ import initialData from "./data/dummy-data";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import KanbanColumn from "./Components/KanbanColumn";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
@@ -35,12 +34,20 @@ class App extends React.Component {
       newColumn: "",
       formVisibility: "hidden",
       newTaskVisibility: "none",
+      newTaskName: "",
+      newTaskDescription: "",
+      newTaskColumnId: "null",
     };
     this.addColumn = this.addColumn.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
     this.addTask = this.addTask.bind(this);
     this.newTaskModal = this.newTaskModal.bind(this);
+    this.editTask = this.editTask.bind(this);
+    this.editContent = this.editContent.bind(this);
+    this.taskNameChange = this.taskNameChange.bind(this);
+    this.taskDescriptionChange = this.taskDescriptionChange.bind(this);
+    this.toggleNewTask = this.toggleNewTask.bind(this);
   }
 
   onDragEnd = (result) => {
@@ -127,6 +134,16 @@ class App extends React.Component {
     this.setState({ newColumn: value });
   }
 
+  taskNameChange(event) {
+    const value = event.target.value;
+    this.setState({ newTaskName: value });
+  }
+
+  taskDescriptionChange(event) {
+    const value = event.target.value;
+    this.setState({ newTaskDescription: value });
+  }
+
   addColumn(event) {
     event.preventDefault();
     const { columnOrder, newColumn } = this.state;
@@ -151,8 +168,77 @@ class App extends React.Component {
     }));
   }
 
+  toggleNewTask(event) {
+    this.setState({
+      newTaskVisibility: "block",
+      newTaskColumnId: event.target.id,
+    });
+  }
+
   addTask(event) {
-    console.log(event.target.id);
+    event.preventDefault();
+    const { newTaskName, newTaskDescription, newTaskColumnId } = this.state;
+
+    //add to tasks
+    let newTaskId = `task-${Object.keys(this.state.tasks).length + 1}`;
+
+    //Add taskId to proper column
+    let columns = { ...this.state.columns };
+    let updatedColumnTaskIds = columns[newTaskColumnId].taskIds.slice();
+    updatedColumnTaskIds.push(newTaskId);
+
+    //updating tasks and column taskIds array
+    this.setState((state) => ({
+      ...state,
+      tasks: {
+        ...state.tasks,
+        [newTaskId]: {
+          id: newTaskId,
+          title: newTaskName,
+          content: newTaskDescription,
+        },
+      },
+      columns: {
+        ...state.columns,
+        [newTaskColumnId]: {
+          id: newTaskColumnId,
+          title: newTaskColumnId,
+          taskIds: updatedColumnTaskIds,
+        },
+      },
+      newTaskVisibility: "none",
+      newTaskName: "",
+      newTaskDescription: "",
+      newTaskColumnId: "null",
+    }));
+  }
+
+  editTask(id, newTask) {
+    this.setState((state) => ({
+      ...state,
+      tasks: {
+        ...state.tasks,
+        [id]: {
+          ...state.tasks[id],
+          title: newTask,
+        },
+      },
+    }));
+  }
+
+  editContent(id, newContent) {
+    console.log("im running");
+
+    this.setState((state) => ({
+      ...state,
+      tasks: {
+        ...state.tasks,
+        [id]: {
+          ...state.tasks[id],
+          content: newContent,
+        },
+      },
+    }));
   }
 
   toggleFormVisibility() {
@@ -166,14 +252,21 @@ class App extends React.Component {
   newTaskModal() {
     const classes = useStyles();
     return (
-      <div className={(classes.paper, this.state.newTaskVisibility)}>
-        <form className={classes.root} noValidate autoComplete="off">
+      <div className={classes.paper}>
+        <form
+          onSubmit={this.addTask}
+          className={classes.root}
+          noValidate
+          autoComplete="off"
+        >
           <div>
             <TextField
               className={classes.root}
               id="outlined-basic"
               label="Insert Title"
               variant="outlined"
+              value={this.state.newTaskName}
+              onChange={this.taskNameChange}
             />
           </div>
           <div></div>
@@ -184,12 +277,24 @@ class App extends React.Component {
             multiline
             rows={4}
             variant="outlined"
+            value={this.state.newTaskDescription}
+            onChange={this.taskDescriptionChange}
           />
+          <button type="submit">Add Task</button>
         </form>
-        <DeleteOutlineIcon />
+        <div
+          onClick={() => {
+            this.setState({
+              newTaskVisibility: "none",
+            });
+          }}
+        >
+          <DeleteOutlineIcon />
+        </div>
       </div>
     );
   }
+
   render() {
     const { formVisibility } = this.state;
     let addButton = "+";
@@ -217,11 +322,13 @@ class App extends React.Component {
                   return (
                     <KanbanColumn
                       id={column.id}
+                      editTask={this.editTask}
+                      editContent={this.editContent}
                       key={column.id}
                       column={column}
                       tasks={tasks}
                       index={index}
-                      addTask={this.addTask}
+                      toggleNewTask={this.toggleNewTask}
                     />
                   );
                 })}
@@ -254,7 +361,9 @@ class App extends React.Component {
             )}
           </Droppable>
         </DragDropContext>
-        <this.newTaskModal />
+        <div style={{ display: this.state.newTaskVisibility }}>
+          <this.newTaskModal />
+        </div>
       </div>
     );
   }
