@@ -1,9 +1,17 @@
 import React from "react";
 import "./App.css";
-import KanbanColumn from "./Components/KanbanColumn.js";
 import Header from "./Components/Header";
 import initialData from './data/dummy-data';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import KanbanBody from "./Components/KanbanBody";
+
+// function App() {
+//   return (
+//     <div>
+//       <Header />
+//       <KanbanBody />
+//     </div>
+//   );
 
 
 class App extends React.Component {

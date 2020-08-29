@@ -1,3 +1,32 @@
+header {
+  background-color: lightcoral;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+}
+
+.project-name,
+.column-name {
+  position: relative;
+  padding: 0 30px;
+}
+
+.edit-project-name,
+.edit-column-name {
+  position: absolute;
+  top: 20px;
+  right: 5px;
+  display: none;
+  height: 50%;
+  cursor: pointer;
+}
+
+.project-name:hover .edit-project-name,
+.column-name:hover .edit-column-name {
+  display: block;
+}
+
 .card {
   max-width: 345px;
   box-shadow: "0 0 5px rgba(0, 0, 0, 0.15)";
@@ -5,13 +34,23 @@
   margin: 0.5rem;
 }
 
+.card:hover {
+  cursor: pointer;
+}
+
 .column-container {
   display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  height: calc(99vh - 70px);
 }
+
 .column {
+  flex: 0 0 auto;
   border: 1px solid lightgray;
-  max-width: 355px;
-  height: 90vh;
+  width: 355px;
+  height: 98%;
   margin: 0.5%;
 }
 
@@ -19,20 +58,14 @@
   height: 90%;
   overflow: auto;
 }
-.column-title {
+
+.column-name-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: lightgrey;
   height: 10%;
-}
-
-header {
-  background-color: lightcoral;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 8vh;
+  padding: 0 30px;
 }
 
 .modal {
@@ -50,4 +83,26 @@ header {
 .modalForm {
   width: 100%;
   padding-bottom: 1rem;
+}
+
+.add-column-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  margin-left: 1%;
+}
+
+.text-center {
+  text-align: center;
 }

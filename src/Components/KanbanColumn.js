@@ -1,5 +1,6 @@
 import React from "react";
 import CardModal from "./CardModal";
+import EditIcon from "@material-ui/icons/Edit";
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 export default function KanbanColumn(props) {
