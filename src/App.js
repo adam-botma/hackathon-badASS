@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import KanbanColumn from "./Components/KanbanColumn.js";
 import Header from "./Components/Header";
