@@ -1,31 +1,14 @@
 import React from "react";
 import CardModal from "./CardModal";
 
-export default function KanbanColumn() {
+export default function KanbanColumn(props) {
   return (
     <div className="column">
       <div className="column-title">
-        <h2>Open</h2>
+        <h2>{props.column.title}</h2>
       </div>
       <div className="column-contents">
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
-        < CardModal />
+        { props.tasks.map(task => <CardModal key={task.id} task={task}/>) }
       </div>
     </div>
   );

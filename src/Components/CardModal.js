@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
 
@@ -64,7 +64,7 @@ export default function SimpleModal() {
 
   return (
     <div>
-      < KanbanCard handleOpen={handleOpen} />
+      < KanbanCard handleOpen={handleOpen} title={props.task.title}/>
       <Modal
         open={open}
         onClose={handleClose}
