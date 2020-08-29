@@ -32,7 +32,7 @@ export default function SimpleModal(props) {
 
   // console.log(props.title)
 
-  console.log(props.task.title)
+  // console.log(props.task.title)
 
   const [title, setTitle] = React.useState(props.task.title);
   const [content, setContent] = React.useState(props.task.content);
@@ -56,8 +56,8 @@ export default function SimpleModal(props) {
             variant="outlined"
             defaultValue={title}
             onChange={(event) => {
-              setTitle(event.target.value)
-              props.editTask(props.task.id, event.target.value)
+              setTitle(event.target.value);
+              props.editTask(props.task.id, event.target.value);
             }}
           />
         </div>
@@ -71,8 +71,8 @@ export default function SimpleModal(props) {
           defaultValue={content}
           variant="outlined"
           onChange={(event) => {
-            setContent(event.target.value)
-            props.editContent(props.task.id, event.target.value)
+            setContent(event.target.value);
+            props.editContent(props.task.id, event.target.value);
           }}
         />
       </form>
