@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import KanbanCard from "./KanbanCard";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -63,9 +64,7 @@ export default function SimpleModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        Open Modal
-      </button>
+      < KanbanCard handleOpen={handleOpen} />
       <Modal
         open={open}
         onClose={handleClose}
