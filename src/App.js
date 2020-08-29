@@ -1,14 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import KanbanCard from './Components/KanbanCard'
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import KanbanColumn from "./Components/KanbanColumn.js";
+import Header from "./Components/Header";
 
 function App() {
   return (
     <div>
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
+      <Header />
+      <KanbanColumn />
     </div>
   );
 }
