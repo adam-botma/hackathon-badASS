@@ -1,6 +1,7 @@
 import React from "react";
 import CardModal from "./CardModal";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
 export default function KanbanColumn(props) {
   return (
@@ -13,6 +14,7 @@ export default function KanbanColumn(props) {
         >
           <div className="column-name-container" {...provided.dragHandleProps}>
             <h2>{props.column.title}</h2>
+            <DeleteOutlineIcon onClick={() => props.deleteColumn(props.column.id)} />
           </div>
           <Droppable droppableId={props.column.id} type="task">
             {(provided) => (
@@ -24,12 +26,12 @@ export default function KanbanColumn(props) {
                 {props.tasks.map((task, index) => (
 
                   <CardModal deleteTask={props.deleteTask}
-                             editTask={props.editTask} 
-                             currentColumn={props.column.id} 
-                             editContent={props.editContent} 
-                             key={task.id} 
-                             task={task} 
-                             index={index} 
+                             editTask={props.editTask}
+                             currentColumn={props.column.id}
+                             editContent={props.editContent}
+                             key={task.id}
+                             task={task}
+                             index={index}
                    />
 
                 ))}
