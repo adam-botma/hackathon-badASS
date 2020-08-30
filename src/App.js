@@ -5,6 +5,8 @@ import initialData from "./data/dummy-data";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import KanbanColumn from "./Components/KanbanColumn";
 import NewTaskModal from "./Components/NewTaskModal";
+import TextField from "@material-ui/core/TextField";
+import Button from '@material-ui/core/Button';
 
 class App extends React.Component {
   constructor(props) {
@@ -389,7 +391,6 @@ class App extends React.Component {
                     </div>
                   </div>
                 </div>
-              </div>
             )}
           </Droppable>
         </DragDropContext>
@@ -404,6 +405,7 @@ class App extends React.Component {
         />
       </div>
     );
+    }
   }
 }
 
