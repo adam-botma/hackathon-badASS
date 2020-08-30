@@ -113,6 +113,12 @@ header {
   padding: 0 30px;
   text-transform: capitalize;
   font-weight: 700;
+  justify-content: space-between;
+}
+
+.column-first-half {
+  display: flex;
+  align-items: center;
 }
 
 .edit-column-form,
@@ -195,6 +201,10 @@ header {
 
 .hidden {
   display: none;
+}
+
+.column-badge {
+  text-align: right;
 }
 
 /* MOBILE RESPONSIVENESS */
