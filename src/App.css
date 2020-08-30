@@ -235,6 +235,12 @@ header {
   }
 }
 
+@media (max-width: 767px) and (orientation: landscape) {
+  .column {
+    width: 275px;
+  }
+}
+
 /* Medium devices (desktops, 992px and up) */
 @media (max-width: 992px) and (orientation: landscape) {
   .column {
