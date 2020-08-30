@@ -34,6 +34,7 @@ export default function KanbanColumn(props) {
         }}
       />
       <Button
+        style={{ marginLeft: "2%" }}
         className="edit-column-button"
         variant="contained"
         onClick={() => {
@@ -66,7 +67,7 @@ export default function KanbanColumn(props) {
               aria-describedby="alert-dialog-description"
             >
               <DialogTitle id="alert-dialog-title">
-                {"Are You sure about this?"}
+                {"Are you sure about this?"}
               </DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
