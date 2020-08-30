@@ -93,7 +93,9 @@ class App extends React.Component {
         },
       };
 
-      this.setState(newState);
+      this.setState(newState, () =>
+        localStorage.setItem("state", JSON.stringify(this.state))
+      );
       return;
     }
 
@@ -120,7 +122,9 @@ class App extends React.Component {
         [newFinish.id]: newFinish,
       },
     };
-    this.setState(newState);
+    this.setState(newState, () =>
+      localStorage.setItem("state", JSON.stringify(this.state))
+    );
   };
 
   handleChange(event) {
@@ -148,18 +152,21 @@ class App extends React.Component {
 
     //Adding to columns
 
-    this.setState((state) => ({
-      ...state,
-      columns: {
-        ...state.columns,
-        [newColumn]: {
-          id: newColumn,
-          title: newColumn,
-          taskIds: [],
+    this.setState(
+      (state) => ({
+        ...state,
+        columns: {
+          ...state.columns,
+          [newColumn]: {
+            id: newColumn,
+            title: newColumn,
+            taskIds: [],
+          },
         },
-      },
-      columnOrder: newColumnOrder,
-    }));
+        columnOrder: newColumnOrder,
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   deleteColumn(id) {
@@ -183,7 +190,9 @@ class App extends React.Component {
       columns: currentColumns,
       columnOrder: currentColumnOrder,
     };
-    this.setState(newState);
+    this.setState(newState, () =>
+      localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   toggleNewTask(event) {
@@ -273,24 +282,30 @@ class App extends React.Component {
   }
 
   editColumn(id, columnName) {
-    this.setState((state) => ({
-      ...state,
-      columns: {
-        ...state.columns,
-        [id]: {
-          ...state.columns[id],
-          id: columnName,
-          title: columnName,
+    this.setState(
+      (state) => ({
+        ...state,
+        columns: {
+          ...state.columns,
+          [id]: {
+            ...state.columns[id],
+            id: columnName,
+            title: columnName,
+          },
         },
-      },
-    }));
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   editProject(projectName) {
-    this.setState((state) => ({
-      ...state,
-      project: projectName,
-    }));
+    this.setState(
+      (state) => ({
+        ...state,
+        project: projectName,
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   newProject(event) {
@@ -324,7 +339,9 @@ class App extends React.Component {
       },
     };
 
-    this.setState(updatedState);
+    this.setState(updatedState, () =>
+      localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   toggleFormVisibility() {
