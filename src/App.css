@@ -62,8 +62,13 @@ header {
   padding: 1rem;
 }
 
+.edit-project-input,
+.edit-column-input {
+  margin-right: 0.5rem;
+}
+
 .project-name:hover .edit-project-name,
-.column-name:hover .edit-column-name {
+.column-name-container:hover .edit-column-name {
   display: block;
   visibility: visible;
 }
@@ -73,6 +78,12 @@ header {
   box-shadow: "0 0 5px rgba(0, 0, 0, 0.15)";
   border-radius: 8px;
   margin: 0.5rem;
+  padding: 1rem;
+}
+
+.MuiTypography-root.MuiCardHeader-title.MuiTypography-root-h5.MuiTypography-displayBlock {
+  font-size: 1.25;
+  font-weight: 600;
 }
 
 .card:hover {
@@ -102,17 +113,34 @@ header {
 }
 
 .column-contents-drag {
-  background-color: aqua;
+  background-color: rgb(238, 238, 238);
 }
 
 .column-name-container {
   display: flex;
   align-items: center;
-  background-color: lightgrey;
   height: 10%;
   padding: 0 30px;
   text-transform: capitalize;
   font-weight: 700;
+  color: hsl(0, 0%, 10%);
+}
+
+.task-btn-container p,
+.add-column-btn p {
+  color: hsl(0, 0%, 30%);
+}
+
+.red {
+  background-color: #F65C51;
+}
+
+.yellow {
+  background-color: #FFB75E;
+}
+
+.blue {
+  background-color: #7689F5;
 }
 
 .edit-column-form,
@@ -144,19 +172,29 @@ header {
 
 .add-column-btn,
 .add-task-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: none;
   cursor: pointer;
 }
 
+.add-column-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-column-form > * {
+  margin-bottom: 1rem;
+}
+
 .add-column-btn {
-  margin-left: 10px;
+  margin: 1.5rem;
+  text-align: center;
+}
+
+.add-column-btn-wrapper {
+  margin: 1rem;
 }
 
 .add-task-btn {
-  margin-top: 2%;
+  margin-top: 0.5rem;
 }
 
 .task-btn-container {

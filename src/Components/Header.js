@@ -2,21 +2,23 @@ import React, { useState } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { spacing } from '@material-ui/system';
 
 export default function Header(props) {
   const [inputOpen, setInputOpen] = useState(false)
   const [project, setProject] = useState(props.project)
-
   const inputOrText = inputOpen
     ? <form noValidate autoComplete="off" className="edit-project-form">
-      <TextField
-        id="standard-basic"
-        defaultValue={project}
-        onChange={(event) => {
-          setProject(event.target.value)
-        }}
-      />
-      <Button variant="contained" onClick={() => {
+      <div className="edit-project-input">
+        <TextField
+          id="standard-basic"
+          defaultValue={project}
+          onChange={(event) => {
+            setProject(event.target.value)
+          }}
+        />
+      </div>
+      <Button mx={2} variant="contained" onClick={() => {
         props.editProject(project)
         setInputOpen(false)
       }}>Apply</Button>

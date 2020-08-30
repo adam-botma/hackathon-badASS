@@ -10,6 +10,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 export default function KanbanColumn(props) {
   const [open, setOpen] = React.useState(false);
@@ -26,13 +28,15 @@ export default function KanbanColumn(props) {
 
   const inputOrText = inputOpen ? (
     <form noValidate autoComplete="off" className="edit-column-form">
-      <TextField
-        id="standard-basic"
-        defaultValue={column}
-        onChange={(event) => {
-          setColumn(event.target.value);
-        }}
-      />
+      <div className="edit-column-input">
+        <TextField
+          id="standard-basic"
+          defaultValue={column}
+          onChange={(event) => {
+            setColumn(event.target.value);
+          }}
+        />
+      </div>
       <Button
         className="edit-column-button"
         variant="contained"
@@ -56,41 +60,43 @@ export default function KanbanColumn(props) {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <div className="column-name-container" {...provided.dragHandleProps}>
+          <div className={`column-name-container ${props.column.color}`} {...provided.dragHandleProps}>
             {inputOrText}
-            <DeleteOutlineIcon onClick={handleClickOpen} />
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title">
-                {"Are You sure about this?"}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  Deleting an entire column will result in deleting all of the
-                  tasks within it as well.
+            <div className="edit-column-name">
+              <DeleteOutlineIcon onClick={handleClickOpen} />
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Are You sure about this?"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    Deleting an entire column will result in deleting all of the
+                    tasks within it as well.
                 </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                  CANCEL
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    CANCEL
                 </Button>
-                <Button
-                  onClick={() => {
-                    props.deleteColumn(props.column.id);
-                    handleClose();
-                  }}
-                  color="primary"
-                  autoFocus
-                >
-                  DELETE
+                  <Button
+                    onClick={() => {
+                      props.deleteColumn(props.column.id);
+                      handleClose();
+                    }}
+                    color="primary"
+                    autoFocus
+                  >
+                    DELETE
                 </Button>
-              </DialogActions>
-            </Dialog>
-            <EditIcon onClick={() => setInputOpen(true)} />
+                </DialogActions>
+              </Dialog>
+              <EditIcon onClick={() => setInputOpen(true)} />
+            </div>
           </div>
           <Droppable droppableId={props.column.id} type="task">
             {(provided, snapshot) => (
@@ -116,13 +122,12 @@ export default function KanbanColumn(props) {
                 ))}
                 {provided.placeholder}
                 <div className="task-btn-container">
-                  <button
-                    onClick={props.toggleNewTask}
-                    className="add-task-btn"
-                    id={props.id}
-                  >
-                    +
-                  </button>
+                  <div className="add-task-btn" onClick={props.toggleNewTask} id={props.id}>
+                    <Fab>
+                        <AddIcon />
+                      </Fab>
+                  </div>
+                  <p>Add a task</p>
                 </div>
               </div>
             )}
