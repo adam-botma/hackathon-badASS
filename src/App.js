@@ -38,7 +38,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    localStorage.setItem("state", this.state);
+    const localstorage = JSON.parse(localStorage.getItem("state"));
+    console.log(localstorage);
+    if (localstorage) {
+      this.setState(localstorage);
+    }
   }
 
   onDragEnd = (result) => {
@@ -212,29 +216,33 @@ class App extends React.Component {
     updatedColumnTaskIds.push(newTaskId);
 
     //updating tasks and column taskIds array
-    this.setState((state) => ({
-      ...state,
-      tasks: {
-        ...state.tasks,
-        [newTaskId]: {
-          id: newTaskId,
-          title: newTaskName,
-          content: newTaskDescription,
+    this.setState(
+      (state) => ({
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [newTaskId]: {
+            id: newTaskId,
+            title: newTaskName,
+            content: newTaskDescription,
+          },
         },
-      },
-      columns: {
-        ...state.columns,
-        [newTaskColumnId]: {
-          id: newTaskColumnId,
-          title: newTaskColumnId,
-          taskIds: updatedColumnTaskIds,
+        columns: {
+          ...state.columns,
+          [newTaskColumnId]: {
+            id: newTaskColumnId,
+            title: newTaskColumnId,
+            taskIds: updatedColumnTaskIds,
+          },
         },
-      },
-      newTaskVisibility: false,
-      newTaskName: "",
-      newTaskDescription: "",
-      newTaskColumnId: "null",
-    }));
+        newTaskVisibility: false,
+        newTaskName: "",
+        newTaskDescription: "",
+        newTaskColumnId: "null",
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
+    console.log(this.state);
   }
 
   editTask(id, newTask) {
