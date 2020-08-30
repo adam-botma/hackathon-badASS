@@ -109,7 +109,7 @@ header {
   display: flex;
   align-items: center;
   background-color: lightgrey;
-  height: 10%;
+  height: 60px;
   padding: 0 30px;
   text-transform: capitalize;
   font-weight: 700;
@@ -204,7 +204,14 @@ header {
 }
 
 .column-badge {
-  text-align: right;
+  background-color: darkgray;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
 /* MOBILE RESPONSIVENESS */

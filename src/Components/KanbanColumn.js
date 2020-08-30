@@ -96,9 +96,7 @@ export default function KanbanColumn(props) {
                 </DialogActions>
               </Dialog>
             </div>
-            <div>
-              <span className="column-badge">{props.tasks.length}</span>
-            </div>
+            <div className="column-badge">{props.tasks.length}</div>
           </div>
           <Droppable droppableId={props.column.id} type="task">
             {(provided, snapshot) => (
