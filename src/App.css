@@ -184,15 +184,36 @@ header {
 }
 
 .badge-modal-header {
-  font-family: 'Baloo 2';
+  font-family: "Baloo 2";
   font-size: 2.25rem;
 }
 
 .badge-text {
   font-size: 1.5rem;
-  color: rgba(0, 0, 0, 0.9)
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .hidden {
   display: none;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+  .welcome-content {
+    padding: 3%;
+  }
+
+  .column-container {
+    flex-wrap: wrap;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (max-width: 992px) {
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (max-width: 1200px) {
 }
