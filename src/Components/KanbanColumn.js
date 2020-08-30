@@ -10,15 +10,30 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
+import Confetti from 'react-dom-confetti';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
+
 export default function KanbanColumn(props) {
-  console.log(props);
+
 
   const [open, setOpen] = React.useState(false);
   const [inputOpen, setInputOpen] = useState(false);
   const [column, setColumn] = useState(props.column.title);
+  const confettiConfig = {
+    angle: "360",
+    spread: 360,
+    startVelocity: 40,
+    elementCount: 70,
+    dragFriction: 0.12,
+    duration: 3000,
+    stagger: 3,
+    width: "10px",
+    height: "10px",
+    perspective: "803px",
+    colors: ["#FFB75E", "#f65c51", "#7689f5"]
+  };
 
   const handleClickOpen = () => {
     setOpen(true);

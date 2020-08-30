@@ -13,6 +13,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,8 @@ class App extends React.Component {
       newTaskDescription: "",
       newTaskColumnId: "null",
       badgeModal: false,
-      level: 0
+      level: 0,
+      confetti: false,
     };
     this.addColumn = this.addColumn.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -75,6 +77,7 @@ class App extends React.Component {
       const newState = {
         ...this.state,
         columnOrder: newColumnOrder,
+        confetti: false,
       };
       this.setState(newState, () =>
         localStorage.setItem("state", JSON.stringify(this.state))
@@ -102,6 +105,7 @@ class App extends React.Component {
           ...this.state.columns,
           [newColumn.id]: newColumn,
         },
+        confetti: false,
       };
 
       this.setState(newState, () =>
@@ -132,6 +136,7 @@ class App extends React.Component {
         [newStart.id]: newStart,
         [newFinish.id]: newFinish,
       },
+      confetti: false,
     };
     this.setState(newState, () => {
       localStorage.setItem("state", JSON.stringify(this.state))
@@ -150,6 +155,11 @@ class App extends React.Component {
         ...state,
         badgeModal: true,
         level: numCompleted / 5
+      }))
+    } else {
+      this.setState(state => ({
+        ...state,
+        confetti: true
       }))
     }
   }
@@ -459,6 +469,7 @@ class App extends React.Component {
                         tasks={tasks}
                         index={index}
                         toggleNewTask={this.toggleNewTask}
+                        confetti={this.state.confetti}
                       />
                     );
                   })}
