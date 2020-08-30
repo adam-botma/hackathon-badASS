@@ -44,7 +44,7 @@ export default function KanbanColumn(props) {
 
   return (
     <Draggable draggableId={props.column.id} index={props.index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           className="column"
           {...provided.draggableProps}
@@ -81,9 +81,9 @@ export default function KanbanColumn(props) {
               <EditIcon onClick={() => setInputOpen(true)}/>
           </div>
           <Droppable droppableId={props.column.id} type="task">
-            {(provided) => (
+            {(provided, snapshot) => (
               <div
-                className="column-contents"
+                className={snapshot.isDraggingOver ?" column-contents column-contents-drag" :"column-contents"}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >

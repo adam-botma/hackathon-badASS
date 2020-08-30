@@ -101,6 +101,10 @@ header {
   overflow: auto;
 }
 
+.column-contents-drag {
+  background-color: aqua;
+}
+
 .column-name-container {
   display: flex;
   align-items: center;
