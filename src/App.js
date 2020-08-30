@@ -8,7 +8,10 @@ import NewTaskModal from "./Components/NewTaskModal";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import Modal from "@material-ui/core/Modal";
-import BadgeModal from "./Components/BadgeModal"
+import BadgeModal from "./Components/BadgeModal";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import CloseIcon from '@material-ui/icons/Close';
 
 class App extends React.Component {
   constructor(props) {
@@ -170,6 +173,10 @@ class App extends React.Component {
     event.preventDefault();
     const { columnOrder, newColumn } = this.state;
 
+    const colors = ['red', 'yellow', 'blue']
+
+    const randomColor = Math.floor(Math.random() * colors.length)
+
     //Addint to columnOrder
     let newColumnOrder = columnOrder.slice();
     newColumnOrder.push(newColumn);
@@ -185,6 +192,7 @@ class App extends React.Component {
             id: newColumn,
             title: newColumn,
             taskIds: [],
+            color: colors[randomColor]
           },
         },
         columnOrder: newColumnOrder,
@@ -223,7 +231,7 @@ class App extends React.Component {
     if (!this.state.newTaskVisibility) {
       this.setState({
         newTaskVisibility: true,
-        newTaskColumnId: event.target.id,
+        newTaskColumnId: event.currentTarget.id,
       });
     } else {
       this.setState({
@@ -385,10 +393,11 @@ class App extends React.Component {
 
   render() {
     const { formVisibility } = this.state;
-    let addButton = "+";
+    let addButton = <AddIcon />;
     if (formVisibility === "visible") {
-      addButton = "x";
+      addButton = <CloseIcon />;
     }
+    const messageVisible = formVisibility === "visible" ? '' : 'Add a column'
     if (this.state.welcomePage) {
       return (
         <div className="app-splash">
@@ -455,26 +464,29 @@ class App extends React.Component {
                   })}
                   {provided.placeholder}
                   <div className="add-col">
-                    <button
-                      onClick={this.toggleFormVisibility}
-                      className="add-column-btn"
-                    >
-                      {addButton}
-                    </button>
+                    <div className="add-column-btn">
+                      <Fab onClick={this.toggleFormVisibility}>
+                        {addButton}
+                      </Fab>
+                      <p>{messageVisible}</p>
+                    </div>
                     <div style={{ visibility: formVisibility }}>
                       <form
                         className="add-column-form text-center"
                         onSubmit={this.addColumn}
                       >
-                        <label htmlFor="column-name">Column Name</label> <br />
-                        <input
-                          name="column-name"
-                          type="text"
-                          id="column-name"
-                          value={this.state.newColumn}
+                        <TextField
+                          id="outlined-basic"
+                          label="Insert Title"
+                          variant="outlined"
+                          defaultValue={this.state.newColumn}
                           onChange={this.handleChange}
-                        ></input>
-                        <button type="submit">Enter</button>
+                        />
+                        <div className="add-column-btn-wrapper">
+                          <Button variant="contained" color="primary" type="submit">
+                            Enter
+                        </Button>
+                        </div>
                       </form>
                     </div>
                   </div>

@@ -10,6 +10,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 export default function KanbanColumn(props) {
   console.log(props);
@@ -28,13 +30,15 @@ export default function KanbanColumn(props) {
 
   const inputOrText = inputOpen ? (
     <form noValidate autoComplete="off" className="edit-column-form">
-      <TextField
-        id="standard-basic"
-        defaultValue={column}
-        onChange={(event) => {
-          setColumn(event.target.value);
-        }}
-      />
+      <div className="edit-column-input">
+        <TextField
+          id="standard-basic"
+          defaultValue={column}
+          onChange={(event) => {
+            setColumn(event.target.value);
+          }}
+        />
+      </div>
       <Button
         style={{ marginLeft: "2%" }}
         className="edit-column-button"
@@ -59,10 +63,9 @@ export default function KanbanColumn(props) {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <div className="column-name-container" {...provided.dragHandleProps}>
-            <div className="column-first-half">
-              {inputOrText}
-              <EditIcon onClick={() => setInputOpen(true)} />
+          <div className={`column-name-container ${props.column.color}`} {...provided.dragHandleProps}>
+            {inputOrText}
+            <div className="edit-column-name">
               <DeleteOutlineIcon onClick={handleClickOpen} />
               <Dialog
                 open={open}
@@ -77,12 +80,12 @@ export default function KanbanColumn(props) {
                   <DialogContentText id="alert-dialog-description">
                     Deleting an entire column will result in deleting all of the
                     tasks within it as well.
-                  </DialogContentText>
+                </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
                     CANCEL
-                  </Button>
+                </Button>
                   <Button
                     onClick={() => {
                       props.deleteColumn(props.column.id);
@@ -92,9 +95,10 @@ export default function KanbanColumn(props) {
                     autoFocus
                   >
                     DELETE
-                  </Button>
+                </Button>
                 </DialogActions>
               </Dialog>
+              <EditIcon onClick={() => setInputOpen(true)} />
             </div>
             <div className="column-badge">{props.tasks.length}</div>
           </div>
@@ -122,13 +126,12 @@ export default function KanbanColumn(props) {
                 ))}
                 {provided.placeholder}
                 <div className="task-btn-container">
-                  <button
-                    onClick={props.toggleNewTask}
-                    className="add-task-btn"
-                    id={props.id}
-                  >
-                    +
-                  </button>
+                  <div className="add-task-btn" onClick={props.toggleNewTask} id={props.id}>
+                    <Fab>
+                        <AddIcon />
+                      </Fab>
+                  </div>
+                  <p>Add a task</p>
                 </div>
               </div>
             )}
