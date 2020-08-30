@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CardModal from "./CardModal";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
@@ -8,9 +8,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import EditIcon from "@material-ui/icons/Edit";
+import TextField from '@material-ui/core/TextField';
+
 
 export default function KanbanColumn(props) {
-  const [open, setOpen] = React.useState(false);
+   const [open, setOpen] = React.useState(false);
+   const [inputOpen, setInputOpen] = useState(false)
+   const [column, setColumn] = useState(props.column.title)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,6 +24,24 @@ export default function KanbanColumn(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  
+
+  const inputOrText = inputOpen
+    ? <form noValidate autoComplete="off" className="edit-column-form">
+      <TextField
+      id="standard-basic"
+        defaultValue={column}
+        onChange={(event) => {
+          setColumn(event.target.value)
+        }}
+      />
+      <Button className="edit-column-button" variant="contained" onClick={() => {
+        props.editColumn(props.id, column)
+        setInputOpen(false)
+        }}>Apply</Button>
+    </form>
+    : <h2>{column}</h2>
+
 
   return (
     <Draggable draggableId={props.column.id} index={props.index}>
@@ -57,6 +80,9 @@ export default function KanbanColumn(props) {
           </Button>
                 </DialogActions>
               </Dialog>
+            {inputOrText}
+            <div className="edit-column-name">
+              <EditIcon onClick={() => setInputOpen(true)}/>
             </div>
           </div>
           <Droppable droppableId={props.column.id} type="task">
