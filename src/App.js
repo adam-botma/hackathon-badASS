@@ -33,7 +33,6 @@ class App extends React.Component {
     this.taskNameChange = this.taskNameChange.bind(this);
     this.taskDescriptionChange = this.taskDescriptionChange.bind(this);
     this.toggleNewTask = this.toggleNewTask.bind(this);
-    this.deleteColumn = this.deleteColumn.bind(this);
     this.newProject = this.newProject.bind(this)
   }
 
@@ -153,30 +152,6 @@ class App extends React.Component {
       },
       columnOrder: newColumnOrder,
     }));
-  }
-
-  deleteColumn(id) {
-    let currentColumns = Object.assign({}, this.state.columns);
-    const tasksToDelete = Array.from(this.state.columns[id].taskIds);
-    const currentTasks = Object.assign({}, this.state.tasks);
-    delete currentColumns[id];
-
-    for(let index = 0 ; index < tasksToDelete.length ; index++){
-      delete currentTasks[tasksToDelete[index]]
-    }
-
-    const currentColumnOrder = Array.from(this.state.columnOrder);
-
-    currentColumnOrder.splice(currentColumnOrder.indexOf(id), 1)
-    console.log(currentColumnOrder);
-
-    const newState = {
-      ...this.state,
-      tasks: currentTasks,
-      columns: currentColumns,
-      columnOrder: currentColumnOrder,
-    }
-    this.setState(newState);
   }
 
   toggleNewTask(event) {
@@ -330,7 +305,6 @@ class App extends React.Component {
       addButton = "x";
     }
 
-
     if (this.state.welcomePage) {
       return (
         <div className="app-splash">
@@ -379,7 +353,6 @@ class App extends React.Component {
                     return (
                       <KanbanColumn
                         deleteTask={this.deleteTask}
-                        deleteColumn={this.deleteColumn}
                         id={column.id}
                         editTask={this.editTask}
                         editColumn={this.editColumn}
