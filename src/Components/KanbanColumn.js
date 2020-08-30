@@ -142,7 +142,9 @@ export default function KanbanColumn(props) {
                 {provided.placeholder}
                 <div className="task-btn-container">
                   <div className="add-task-btn" onClick={props.toggleNewTask} id={props.id}>
+
                     <Fab>
+                      {props.column.id === 'column-3' ? <Confetti active={props.confetti} config={confettiConfig} /> : ''}
                         <AddIcon />
                       </Fab>
                   </div>
