@@ -78,9 +78,7 @@ export default function KanbanColumn(props) {
           </Button>
                 </DialogActions>
               </Dialog>
-            <div className="edit-column-name">
               <EditIcon onClick={() => setInputOpen(true)}/>
-            </div>
           </div>
           <Droppable droppableId={props.column.id} type="task">
             {(provided) => (
