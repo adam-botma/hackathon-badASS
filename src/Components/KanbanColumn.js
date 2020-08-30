@@ -11,7 +11,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from '@material-ui/core/TextField';
 
-
 export default function KanbanColumn(props) {
    const [open, setOpen] = React.useState(false);
    const [inputOpen, setInputOpen] = useState(false)
@@ -24,7 +23,7 @@ export default function KanbanColumn(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  
+
 
   const inputOrText = inputOpen
     ? <form noValidate autoComplete="off" className="edit-column-form">
@@ -52,8 +51,7 @@ export default function KanbanColumn(props) {
           ref={provided.innerRef}
         >
           <div className="column-name-container" {...provided.dragHandleProps}>
-            <h2>{props.column.title}</h2>
-            <div>
+            {inputOrText}
               <DeleteOutlineIcon onClick={handleClickOpen} />
               <Dialog
                 open={open}
@@ -80,7 +78,6 @@ export default function KanbanColumn(props) {
           </Button>
                 </DialogActions>
               </Dialog>
-            {inputOrText}
             <div className="edit-column-name">
               <EditIcon onClick={() => setInputOpen(true)}/>
             </div>
