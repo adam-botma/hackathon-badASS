@@ -7,11 +7,12 @@ import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    maxWidth: "400px",
+    width: "75%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     borderRadius: 8,
-    padding: 32,
+    padding: "2rem",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
