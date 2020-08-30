@@ -10,17 +10,20 @@ const initialData = {
     'column-1': {
       id: 'column-1',
       title: 'open',
-      taskIds: ['task-1', 'task-2', 'task-3', 'task-4',],
+      taskIds: ['task-1', 'task-2', 'task-3', 'task-4'],
+      color: 'blue'
     },
     'column-2': {
       id: 'column-2',
       title: 'pending',
       taskIds: [],
+      color: 'yellow'
     },
     'column-3': {
       id: 'column-3',
       title: 'complete',
       taskIds: [],
+      color: 'red'
     }
   },
   columnOrder: ['column-1', 'column-2', 'column-3'],
