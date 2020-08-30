@@ -43,6 +43,13 @@ class App extends React.Component {
     this.closeBadgeModal = this.closeBadgeModal.bind(this);
   }
 
+  componentDidMount() {
+    const localstorage = JSON.parse(localStorage.getItem("state"));
+    if (localstorage) {
+      this.setState(localstorage);
+    }
+  }
+
   onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
 
@@ -66,7 +73,9 @@ class App extends React.Component {
         ...this.state,
         columnOrder: newColumnOrder,
       };
-      this.setState(newState);
+      this.setState(newState, () =>
+        localStorage.setItem("state", JSON.stringify(this.state))
+      );
       return;
     }
 
@@ -92,7 +101,9 @@ class App extends React.Component {
         },
       };
 
-      this.setState(newState);
+      this.setState(newState, () =>
+        localStorage.setItem("state", JSON.stringify(this.state))
+      );
       return;
     }
 
@@ -123,6 +134,7 @@ class App extends React.Component {
   };
 
   checkCompleted() {
+    localStorage.setItem("state", JSON.stringify(this.state)
     const numCompleted = this.state.columns["column-3"].taskIds.length
     if (numCompleted % 5 === 0) {
       console.log("5 in completed!")
@@ -159,18 +171,21 @@ class App extends React.Component {
 
     //Adding to columns
 
-    this.setState((state) => ({
-      ...state,
-      columns: {
-        ...state.columns,
-        [newColumn]: {
-          id: newColumn,
-          title: newColumn,
-          taskIds: [],
+    this.setState(
+      (state) => ({
+        ...state,
+        columns: {
+          ...state.columns,
+          [newColumn]: {
+            id: newColumn,
+            title: newColumn,
+            taskIds: [],
+          },
         },
-      },
-      columnOrder: newColumnOrder,
-    }));
+        columnOrder: newColumnOrder,
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   deleteColumn(id) {
@@ -179,13 +194,13 @@ class App extends React.Component {
     const currentTasks = Object.assign({}, this.state.tasks);
     delete currentColumns[id];
 
-    for(let index = 0 ; index < tasksToDelete.length ; index++){
-      delete currentTasks[tasksToDelete[index]]
+    for (let index = 0; index < tasksToDelete.length; index++) {
+      delete currentTasks[tasksToDelete[index]];
     }
 
     const currentColumnOrder = Array.from(this.state.columnOrder);
 
-    currentColumnOrder.splice(currentColumnOrder.indexOf(id), 1)
+    currentColumnOrder.splice(currentColumnOrder.indexOf(id), 1);
     console.log(currentColumnOrder);
 
     const newState = {
@@ -193,8 +208,10 @@ class App extends React.Component {
       tasks: currentTasks,
       columns: currentColumns,
       columnOrder: currentColumnOrder,
-    }
-    this.setState(newState);
+    };
+    this.setState(newState, () =>
+      localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   toggleNewTask(event) {
@@ -226,42 +243,48 @@ class App extends React.Component {
     updatedColumnTaskIds.push(newTaskId);
 
     //updating tasks and column taskIds array
-    this.setState((state) => ({
-      ...state,
-      tasks: {
-        ...state.tasks,
-        [newTaskId]: {
-          id: newTaskId,
-          title: newTaskName,
-          content: newTaskDescription,
+    this.setState(
+      (state) => ({
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [newTaskId]: {
+            id: newTaskId,
+            title: newTaskName,
+            content: newTaskDescription,
+          },
         },
-      },
-      columns: {
-        ...state.columns,
-        [newTaskColumnId]: {
-          id: newTaskColumnId,
-          title: newTaskColumnId,
-          taskIds: updatedColumnTaskIds,
+        columns: {
+          ...state.columns,
+          [newTaskColumnId]: {
+            id: newTaskColumnId,
+            title: newTaskColumnId,
+            taskIds: updatedColumnTaskIds,
+          },
         },
-      },
-      newTaskVisibility: false,
-      newTaskName: "",
-      newTaskDescription: "",
-      newTaskColumnId: "null",
-    }));
+        newTaskVisibility: false,
+        newTaskName: "",
+        newTaskDescription: "",
+        newTaskColumnId: "null",
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   editTask(id, newTask) {
-    this.setState((state) => ({
-      ...state,
-      tasks: {
-        ...state.tasks,
-        [id]: {
-          ...state.tasks[id],
-          title: newTask,
+    this.setState(
+      (state) => ({
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [id]: {
+            ...state.tasks[id],
+            title: newTask,
+          },
         },
-      },
-    }));
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   editContent(id, newContent) {
@@ -278,39 +301,44 @@ class App extends React.Component {
   }
 
   editColumn(id, columnName) {
-    this.setState((state) => ({
-      ...state,
-      columns: {
-        ...state.columns,
-        [id]: {
-          ...state.columns[id],
-          id: columnName,
-          title: columnName,
+    this.setState(
+      (state) => ({
+        ...state,
+        columns: {
+          ...state.columns,
+          [id]: {
+            ...state.columns[id],
+            // id: columnName,
+            title: columnName,
+          },
         },
-      },
-    }));
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   editProject(projectName) {
-    this.setState((state) => ({
-      ...state,
-      project: projectName,
-    }));
+    this.setState(
+      (state) => ({
+        ...state,
+        project: projectName,
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   newProject(event) {
-    const name = this.state.newProjectValue
+    const name = this.state.newProjectValue;
 
-    event.preventDefault()
-    console.log(name)
-    this.setState(state => ({
+    event.preventDefault();
+    this.setState((state) => ({
       ...state,
       project: name,
-      welcomePage: false
-    }))
+      welcomePage: false,
+    }));
   }
 
-  deleteTask(id, column){
+  deleteTask(id, column) {
     let currentTasks = Object.assign({}, this.state.tasks);
     delete currentTasks[id];
 
@@ -330,7 +358,9 @@ class App extends React.Component {
       },
     };
 
-    this.setState(updatedState);
+    this.setState(updatedState, () =>
+      localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   toggleFormVisibility() {
@@ -360,18 +390,16 @@ class App extends React.Component {
           <div className="welcome-content">
             <h1>Welcome to BadASS Kanban!</h1>
             <h3>Choose a project name to get started</h3>
-            <form
-              onSubmit={this.newProject}
-              noValidate
-              autoComplete="off"
-            >
+            <form onSubmit={this.newProject} noValidate autoComplete="off">
               <div className="welcome-input">
                 <TextField
                   id="outlined-basic"
                   label="Insert Title"
                   variant="outlined"
                   value={this.state.newProjectValue}
-                  onChange={event => this.setState({ newProjectValue: event.target.value })}
+                  onChange={(event) =>
+                    this.setState({ newProjectValue: event.target.value })
+                  }
                 />
               </div>
               <Button variant="contained" color="primary" type="submit">
@@ -380,14 +408,18 @@ class App extends React.Component {
             </form>
           </div>
         </div>
-      )
+      );
     } else {
       return (
         <div>
           <BadgeModal open={this.state.badgeModal} close={this.closeBadgeModal} level={this.state.level} />
           <Header project={this.state.project} editProject={this.editProject} />
           <DragDropContext onDragEnd={this.onDragEnd}>
-            <Droppable droppableId="columns" direction="horizontal" type="column">
+            <Droppable
+              droppableId="columns"
+              direction="horizontal"
+              type="column"
+            >
               {(provided) => (
                 <div
                   className="column-container"
@@ -442,20 +474,20 @@ class App extends React.Component {
                     </div>
                   </div>
                 </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-        <NewTaskModal
-          addTask={this.addTask}
-          newTaskName={this.state.newTaskName}
-          taskNameChange={this.taskNameChange}
-          newTaskDescription={this.newTaskDescription}
-          taskDescriptionChange={this.taskDescriptionChange}
-          toggleNewTask={this.toggleNewTask}
-          visibility={this.state.newTaskVisibility}
-        />
-      </div>
-    );
+              )}
+            </Droppable>
+          </DragDropContext>
+          <NewTaskModal
+            addTask={this.addTask}
+            newTaskName={this.state.newTaskName}
+            taskNameChange={this.taskNameChange}
+            newTaskDescription={this.newTaskDescription}
+            taskDescriptionChange={this.taskDescriptionChange}
+            toggleNewTask={this.toggleNewTask}
+            visibility={this.state.newTaskVisibility}
+          />
+        </div>
+      );
     }
   }
 }
