@@ -130,12 +130,17 @@ class App extends React.Component {
         [newFinish.id]: newFinish,
       },
     };
-    this.setState(newState, this.checkCompleted);
+    this.setState(newState, () => {
+      localStorage.setItem("state", JSON.stringify(this.state))
+      if (destination.droppableId === 'column-3') {
+        this.checkCompleted()
+      }
+    });
   };
 
   checkCompleted() {
-    localStorage.setItem("state", JSON.stringify(this.state))
     const numCompleted = this.state.columns["column-3"].taskIds.length
+    console.log("running", numCompleted)
     if (numCompleted % 5 === 0) {
       console.log("5 in completed!")
       this.setState(state => ({
