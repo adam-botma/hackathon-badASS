@@ -22,9 +22,8 @@ export default function Header(props) {
         setInputOpen(false)
       }}>Apply</Button>
     </form>
-  ) : (
+  :
     <h2>{project}</h2>
-  );
 
   return (
     <header>

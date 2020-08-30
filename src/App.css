@@ -141,7 +141,7 @@ header {
 
 .blue {
   background-color: #7689F5;
-  
+
 }
 
 .column-first-half {
@@ -242,7 +242,7 @@ header {
 }
 
 .column-badge {
-  background-color: darkgray;
+  background-color: rgba(0, 0, 0, 0.2);
   height: 30px;
   width: 30px;
   border-radius: 50%;
