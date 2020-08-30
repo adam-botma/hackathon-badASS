@@ -37,6 +37,8 @@ export default function SimpleModal(props) {
   const [title, setTitle] = React.useState(props.task.title);
   const [content, setContent] = React.useState(props.task.content);
 
+  const completedCheck = props.currentColumn === 'column-3';
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -81,12 +83,13 @@ export default function SimpleModal(props) {
   );
 
   return (
-    <Draggable draggableId={props.task.id} index={props.index}>
+    <Draggable draggableId={props.task.id} index={props.index} isDragDisabled={completedCheck}>
       {(provided) => (
         <div
           {...provided.dragHandleProps}
           {...provided.draggableProps}
           ref={provided.innerRef}
+
         >
           <KanbanCard handleOpen={handleOpen} title={props.task.title} />
           <Modal
