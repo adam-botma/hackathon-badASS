@@ -172,3 +172,23 @@ header {
 .text-center {
   text-align: center;
 }
+
+.badge-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.badge-modal-header {
+  font-family: 'Baloo 2';
+  font-size: 2.25rem;
+}
+
+.badge-text {
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.9)
+}
+
+.hidden {
+  display: none;
+}

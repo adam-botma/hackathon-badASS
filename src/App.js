@@ -7,6 +7,8 @@ import KanbanColumn from "./Components/KanbanColumn";
 import NewTaskModal from "./Components/NewTaskModal";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
+import Modal from "@material-ui/core/Modal";
+import BadgeModal from "./Components/BadgeModal"
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +22,8 @@ class App extends React.Component {
       newTaskName: "",
       newTaskDescription: "",
       newTaskColumnId: "null",
+      badgeModal: false,
+      level: 0
     };
     this.addColumn = this.addColumn.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -34,7 +38,9 @@ class App extends React.Component {
     this.taskDescriptionChange = this.taskDescriptionChange.bind(this);
     this.toggleNewTask = this.toggleNewTask.bind(this);
     this.deleteColumn = this.deleteColumn.bind(this);
-    this.newProject = this.newProject.bind(this)
+    this.newProject = this.newProject.bind(this);
+    this.checkCompleted = this.checkCompleted.bind(this);
+    this.closeBadgeModal = this.closeBadgeModal.bind(this);
   }
 
   onDragEnd = (result) => {
@@ -113,8 +119,20 @@ class App extends React.Component {
         [newFinish.id]: newFinish,
       },
     };
-    this.setState(newState);
+    this.setState(newState, this.checkCompleted);
   };
+
+  checkCompleted() {
+    const numCompleted = this.state.columns["column-3"].taskIds.length
+    if (numCompleted % 5 === 0) {
+      console.log("5 in completed!")
+      this.setState(state => ({
+        ...state,
+        badgeModal: true,
+        level: numCompleted / 5
+      }))
+    }
+  }
 
   handleChange(event) {
     const value = event.target.value;
@@ -323,14 +341,19 @@ class App extends React.Component {
     }
   }
 
+  closeBadgeModal() {
+    this.setState(state => ({
+      ...state,
+      badgeModal: false
+    }))
+  }
+
   render() {
     const { formVisibility } = this.state;
     let addButton = "+";
     if (formVisibility === "visible") {
       addButton = "x";
     }
-
-
     if (this.state.welcomePage) {
       return (
         <div className="app-splash">
@@ -361,6 +384,7 @@ class App extends React.Component {
     } else {
       return (
         <div>
+          <BadgeModal open={this.state.badgeModal} close={this.closeBadgeModal} level={this.state.level} />
           <Header project={this.state.project} editProject={this.editProject} />
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Droppable droppableId="columns" direction="horizontal" type="column">
