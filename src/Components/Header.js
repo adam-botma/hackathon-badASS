@@ -46,13 +46,15 @@ export default function Header(props) {
         </div>
       </div>
       <div className="progress-info">
+        <div className="progress-number">
+          <span>{`${completedPercentage}% completed`}</span>
+        </div>
         <div className="progress-bar-container">
           <div
-            style={{ width: `${completedFraction * 285}px` }}
+            style={{ width: `${completedFraction * 290}px` }}
             className="progress"
           ></div>
         </div>
-        <span className="progress-number">{`${completedPercentage}% Completed`}</span>
       </div>
     </header>
   );
