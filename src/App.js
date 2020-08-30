@@ -39,7 +39,6 @@ class App extends React.Component {
 
   componentDidMount() {
     const localstorage = JSON.parse(localStorage.getItem("state"));
-    console.log(localstorage);
     if (localstorage) {
       this.setState(localstorage);
     }
@@ -242,7 +241,6 @@ class App extends React.Component {
       }),
       () => localStorage.setItem("state", JSON.stringify(this.state))
     );
-    console.log(this.state);
   }
 
   editTask(id, newTask) {
@@ -296,7 +294,6 @@ class App extends React.Component {
     const name = this.state.newProjectValue;
 
     event.preventDefault();
-    console.log(name);
     this.setState((state) => ({
       ...state,
       project: name,
