@@ -6,7 +6,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import KanbanColumn from "./Components/KanbanColumn";
 import NewTaskModal from "./Components/NewTaskModal";
 import TextField from "@material-ui/core/TextField";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,7 +34,11 @@ class App extends React.Component {
     this.taskDescriptionChange = this.taskDescriptionChange.bind(this);
     this.toggleNewTask = this.toggleNewTask.bind(this);
     this.deleteColumn = this.deleteColumn.bind(this);
-    this.newProject = this.newProject.bind(this)
+    this.newProject = this.newProject.bind(this);
+  }
+
+  componentDidMount() {
+    localStorage.setItem("state", this.state);
   }
 
   onDragEnd = (result) => {
@@ -161,13 +165,13 @@ class App extends React.Component {
     const currentTasks = Object.assign({}, this.state.tasks);
     delete currentColumns[id];
 
-    for(let index = 0 ; index < tasksToDelete.length ; index++){
-      delete currentTasks[tasksToDelete[index]]
+    for (let index = 0; index < tasksToDelete.length; index++) {
+      delete currentTasks[tasksToDelete[index]];
     }
 
     const currentColumnOrder = Array.from(this.state.columnOrder);
 
-    currentColumnOrder.splice(currentColumnOrder.indexOf(id), 1)
+    currentColumnOrder.splice(currentColumnOrder.indexOf(id), 1);
     console.log(currentColumnOrder);
 
     const newState = {
@@ -175,7 +179,7 @@ class App extends React.Component {
       tasks: currentTasks,
       columns: currentColumns,
       columnOrder: currentColumnOrder,
-    }
+    };
     this.setState(newState);
   }
 
@@ -281,18 +285,18 @@ class App extends React.Component {
   }
 
   newProject(event) {
-    const name = this.state.newProjectValue
+    const name = this.state.newProjectValue;
 
-    event.preventDefault()
-    console.log(name)
-    this.setState(state => ({
+    event.preventDefault();
+    console.log(name);
+    this.setState((state) => ({
       ...state,
       project: name,
-      welcomePage: false
-    }))
+      welcomePage: false,
+    }));
   }
 
-  deleteTask(id, column){
+  deleteTask(id, column) {
     let currentTasks = Object.assign({}, this.state.tasks);
     delete currentTasks[id];
 
@@ -330,25 +334,22 @@ class App extends React.Component {
       addButton = "x";
     }
 
-
     if (this.state.welcomePage) {
       return (
         <div className="app-splash">
           <div className="welcome-content">
             <h1>Welcome to BadASS Kanban!</h1>
             <h3>Choose a project name to get started</h3>
-            <form
-              onSubmit={this.newProject}
-              noValidate
-              autoComplete="off"
-            >
+            <form onSubmit={this.newProject} noValidate autoComplete="off">
               <div className="welcome-input">
                 <TextField
                   id="outlined-basic"
                   label="Insert Title"
                   variant="outlined"
                   value={this.state.newProjectValue}
-                  onChange={event => this.setState({ newProjectValue: event.target.value })}
+                  onChange={(event) =>
+                    this.setState({ newProjectValue: event.target.value })
+                  }
                 />
               </div>
               <Button variant="contained" color="primary" type="submit">
@@ -357,13 +358,17 @@ class App extends React.Component {
             </form>
           </div>
         </div>
-      )
+      );
     } else {
       return (
         <div>
           <Header project={this.state.project} editProject={this.editProject} />
           <DragDropContext onDragEnd={this.onDragEnd}>
-            <Droppable droppableId="columns" direction="horizontal" type="column">
+            <Droppable
+              droppableId="columns"
+              direction="horizontal"
+              type="column"
+            >
               {(provided) => (
                 <div
                   className="column-container"
@@ -418,20 +423,20 @@ class App extends React.Component {
                     </div>
                   </div>
                 </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-        <NewTaskModal
-          addTask={this.addTask}
-          newTaskName={this.state.newTaskName}
-          taskNameChange={this.taskNameChange}
-          newTaskDescription={this.newTaskDescription}
-          taskDescriptionChange={this.taskDescriptionChange}
-          toggleNewTask={this.toggleNewTask}
-          visibility={this.state.newTaskVisibility}
-        />
-      </div>
-    );
+              )}
+            </Droppable>
+          </DragDropContext>
+          <NewTaskModal
+            addTask={this.addTask}
+            newTaskName={this.state.newTaskName}
+            taskNameChange={this.taskNameChange}
+            newTaskDescription={this.newTaskDescription}
+            taskDescriptionChange={this.taskDescriptionChange}
+            toggleNewTask={this.toggleNewTask}
+            visibility={this.state.newTaskVisibility}
+          />
+        </div>
+      );
     }
   }
 }
