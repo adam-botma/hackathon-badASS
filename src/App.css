@@ -212,6 +212,7 @@ header {
   align-items: center;
   justify-content: center;
   color: white;
+  line-height: 1rem;
 }
 
 /* MOBILE RESPONSIVENESS */
