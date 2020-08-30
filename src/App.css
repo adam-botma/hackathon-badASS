@@ -37,6 +37,7 @@ header {
   display: flex;
   align-items: center;
   height: 70px;
+  justify-content: space-between;
 }
 
 .project-name,
@@ -132,16 +133,15 @@ header {
 }
 
 .red {
-  background-color: #F65C51;
+  background-color: #f65c51;
 }
 
 .yellow {
-  background-color: #FFB75E;
+  background-color: #ffb75e;
 }
 
 .blue {
-  background-color: #7689F5;
-
+  background-color: #7689f5;
 }
 
 .column-first-half {
@@ -251,6 +251,37 @@ header {
   justify-content: center;
   color: white;
   line-height: 1rem;
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  margin: 0 2%;
+}
+
+.progress-number {
+  margin: 0 1%;
+  line-height: 1em;
+}
+
+.progress-bar-container {
+  width: 300px;
+  height: 2em;
+  background-color: gray;
+  border-radius: 1em;
+  position: relative;
+}
+
+.progress {
+  position: absolute;
+  height: 1.5em;
+  top: 0.25em;
+  bottom: 0.25em;
+  width: 290px;
+  left: 5px;
+  right: 5px;
+  background-color: lightgray;
+  border-radius: 0.75em;
 }
 
 /* MOBILE RESPONSIVENESS */
