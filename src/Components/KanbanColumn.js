@@ -14,6 +14,8 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
 export default function KanbanColumn(props) {
+  console.log(props);
+
   const [open, setOpen] = React.useState(false);
   const [inputOpen, setInputOpen] = useState(false);
   const [column, setColumn] = useState(props.column.title);
@@ -38,6 +40,7 @@ export default function KanbanColumn(props) {
         />
       </div>
       <Button
+        style={{ marginLeft: "2%" }}
         className="edit-column-button"
         variant="contained"
         onClick={() => {
@@ -71,7 +74,7 @@ export default function KanbanColumn(props) {
                 aria-describedby="alert-dialog-description"
               >
                 <DialogTitle id="alert-dialog-title">
-                  {"Are You sure about this?"}
+                  {"Are you sure about this?"}
                 </DialogTitle>
                 <DialogContent>
                   <DialogContentText id="alert-dialog-description">
@@ -97,6 +100,7 @@ export default function KanbanColumn(props) {
               </Dialog>
               <EditIcon onClick={() => setInputOpen(true)} />
             </div>
+            <div className="column-badge">{props.tasks.length}</div>
           </div>
           <Droppable droppableId={props.column.id} type="task">
             {(provided, snapshot) => (

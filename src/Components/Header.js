@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { spacing } from '@material-ui/system';
 
 export default function Header(props) {
   const [inputOpen, setInputOpen] = useState(false)
@@ -23,14 +22,16 @@ export default function Header(props) {
         setInputOpen(false)
       }}>Apply</Button>
     </form>
-    : <h2>{project}</h2>
+  ) : (
+    <h2>{project}</h2>
+  );
 
   return (
     <header>
       <div className="project-name">
         {inputOrText}
         <div className="edit-project-name">
-          <EditIcon onClick={() => setInputOpen(true)}/>
+          <EditIcon onClick={() => setInputOpen(true)} />
         </div>
       </div>
     </header>

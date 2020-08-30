@@ -9,11 +9,12 @@ import { Draggable } from "react-beautiful-dnd";
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    maxWidth: "400px",
+    width: "75%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     borderRadius: 8,
-    padding: 32,
+    padding: "2rem",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -37,7 +38,7 @@ export default function SimpleModal(props) {
   const [title, setTitle] = React.useState(props.task.title);
   const [content, setContent] = React.useState(props.task.content);
 
-  const completedCheck = props.currentColumn === 'column-3';
+  const completedCheck = props.currentColumn === "column-3";
 
   const handleOpen = () => {
     setOpen(true);
@@ -78,18 +79,23 @@ export default function SimpleModal(props) {
           }}
         />
       </form>
-      <DeleteOutlineIcon onClick={()=> props.deleteTask(props.task.id, props.currentColumn)}/>
+      <DeleteOutlineIcon
+        onClick={() => props.deleteTask(props.task.id, props.currentColumn)}
+      />
     </div>
   );
 
   return (
-    <Draggable draggableId={props.task.id} index={props.index} isDragDisabled={completedCheck}>
+    <Draggable
+      draggableId={props.task.id}
+      index={props.index}
+      isDragDisabled={completedCheck}
+    >
       {(provided) => (
         <div
           {...provided.dragHandleProps}
           {...provided.draggableProps}
           ref={provided.innerRef}
-
         >
           <KanbanCard handleOpen={handleOpen} title={props.task.title} />
           <Modal
