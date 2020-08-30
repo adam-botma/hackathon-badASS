@@ -67,7 +67,9 @@ class App extends React.Component {
         ...this.state,
         columnOrder: newColumnOrder,
       };
-      this.setState(newState);
+      this.setState(newState, () =>
+        localStorage.setItem("state", JSON.stringify(this.state))
+      );
       return;
     }
 
@@ -289,7 +291,7 @@ class App extends React.Component {
           ...state.columns,
           [id]: {
             ...state.columns[id],
-            id: columnName,
+            // id: columnName,
             title: columnName,
           },
         },
