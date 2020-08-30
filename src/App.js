@@ -4,27 +4,7 @@ import Header from "./Components/Header";
 import initialData from "./data/dummy-data";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import KanbanColumn from "./Components/KanbanColumn";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: "absolute",
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    borderRadius: 8,
-    padding: 32,
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-  },
-  root: {
-    width: "100%",
-    paddingBottom: 16,
-  },
-}));
+import NewTaskModal from "./Components/NewTaskModal";
 
 class App extends React.Component {
   constructor(props) {
@@ -33,7 +13,7 @@ class App extends React.Component {
       ...initialData,
       newColumn: "",
       formVisibility: "hidden",
-      newTaskVisibility: "none",
+      newTaskVisibility: false,
       newTaskName: "",
       newTaskDescription: "",
       newTaskColumnId: "null",
@@ -42,7 +22,6 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
     this.addTask = this.addTask.bind(this);
-    this.newTaskModal = this.newTaskModal.bind(this);
     this.editTask = this.editTask.bind(this);
     this.editContent = this.editContent.bind(this);
     this.editColumn = this.editColumn.bind(this);
@@ -172,10 +151,19 @@ class App extends React.Component {
   }
 
   toggleNewTask(event) {
-    this.setState({
-      newTaskVisibility: "block",
-      newTaskColumnId: event.target.id,
-    });
+    if (!this.state.newTaskVisibility) {
+      this.setState({
+        newTaskVisibility: true,
+        newTaskColumnId: event.target.id,
+      });
+    } else {
+      this.setState({
+        newTaskVisibility: false,
+        newTaskColumnId: "null",
+        newTaskName: "",
+        newTaskDescription: "",
+      });
+    }
   }
 
   addTask(event) {
@@ -209,7 +197,7 @@ class App extends React.Component {
           taskIds: updatedColumnTaskIds,
         },
       },
-      newTaskVisibility: "none",
+      newTaskVisibility: false,
       newTaskName: "",
       newTaskDescription: "",
       newTaskColumnId: "null",
@@ -243,33 +231,33 @@ class App extends React.Component {
   }
 
   editColumn(id, columnName) {
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
       columns: {
         ...state.columns,
         [id]: {
           ...state.columns[id],
           id: columnName,
-          title: columnName
-        }
-      }
-    }))
+          title: columnName,
+        },
+      },
+    }));
   }
 
   editProject(projectName) {
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
-      project: projectName
-    }))
+      project: projectName,
+    }));
   }
 
-  deleteTask(id, column){
+  deleteTask(id, column) {
     let currentTasks = Object.assign({}, this.state.tasks);
     delete currentTasks[id];
 
     const columnTasks = Array.from(this.state.columns[column].taskIds);
     const indexToDelete = columnTasks.indexOf(id);
-    columnTasks.splice(indexToDelete, 1)
+    columnTasks.splice(indexToDelete, 1);
 
     const updatedState = {
       ...this.state,
@@ -278,13 +266,13 @@ class App extends React.Component {
         ...this.state.columns,
         [column]: {
           ...this.state.columns[column],
-          taskIds: columnTasks
-        }
-      }
-    }
+          taskIds: columnTasks,
+        },
+      },
+    };
 
     this.setState(updatedState);
-    }
+  }
 
   toggleFormVisibility() {
     if (this.state.formVisibility === "hidden") {
@@ -292,52 +280,6 @@ class App extends React.Component {
     } else {
       this.setState({ formVisibility: "hidden" });
     }
-  }
-
-  newTaskModal() {
-    const classes = useStyles();
-    return (
-      <div className={classes.paper}>
-        <form
-          onSubmit={this.addTask}
-          className={classes.root}
-          noValidate
-          autoComplete="off"
-        >
-          <div>
-            <TextField
-              className={classes.root}
-              id="outlined-basic"
-              label="Insert Title"
-              variant="outlined"
-              value={this.state.newTaskName}
-              onChange={this.taskNameChange}
-            />
-          </div>
-          <div></div>
-          <TextField
-            className={classes.root}
-            id="outlined-multiline-static"
-            label="Multiline"
-            multiline
-            rows={4}
-            variant="outlined"
-            value={this.state.newTaskDescription}
-            onChange={this.taskDescriptionChange}
-          />
-          <button type="submit">Add Task</button>
-        </form>
-        <div
-          onClick={() => {
-            this.setState({
-              newTaskVisibility: "none",
-            });
-          }}
-        >
-          <DeleteOutlineIcon />
-        </div>
-      </div>
-    );
   }
 
   render() {
@@ -409,9 +351,15 @@ class App extends React.Component {
             )}
           </Droppable>
         </DragDropContext>
-        <div style={{ display: this.state.newTaskVisibility }}>
-          <this.newTaskModal />
-        </div>
+        <NewTaskModal
+          addTask={this.addTask}
+          newTaskName={this.state.newTaskName}
+          taskNameChange={this.taskNameChange}
+          newTaskDescription={this.newTaskDescription}
+          taskDescriptionChange={this.taskDescriptionChange}
+          toggleNewTask={this.toggleNewTask}
+          visibility={this.state.newTaskVisibility}
+        />
       </div>
     );
   }
