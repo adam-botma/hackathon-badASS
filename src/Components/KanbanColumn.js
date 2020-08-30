@@ -22,15 +22,15 @@ export default function KanbanColumn(props) {
   const [inputOpen, setInputOpen] = useState(false);
   const [column, setColumn] = useState(props.column.title);
   const confettiConfig = {
-    angle: "360",
+    angle: "180",
     spread: 360,
     startVelocity: 40,
     elementCount: 70,
     dragFriction: 0.12,
     duration: 3000,
     stagger: 3,
-    width: "10px",
-    height: "10px",
+    width: "15px",
+    height: "15px",
     perspective: "803px",
     colors: ["#FFB75E", "#f65c51", "#7689f5"]
   };

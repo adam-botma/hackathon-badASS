@@ -280,6 +280,7 @@ class App extends React.Component {
         columns: {
           ...state.columns,
           [newTaskColumnId]: {
+            ...state.columns[newTaskColumnId],
             id: newTaskColumnId,
             title: newTaskColumnId,
             taskIds: updatedColumnTaskIds,
