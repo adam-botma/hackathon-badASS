@@ -12,6 +12,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
 
 export default function KanbanColumn(props) {
+  console.log(props);
+
   const [open, setOpen] = React.useState(false);
   const [inputOpen, setInputOpen] = useState(false);
   const [column, setColumn] = useState(props.column.title);
@@ -58,40 +60,43 @@ export default function KanbanColumn(props) {
           ref={provided.innerRef}
         >
           <div className="column-name-container" {...provided.dragHandleProps}>
-            {inputOrText}
-            <DeleteOutlineIcon onClick={handleClickOpen} />
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title">
-                {"Are you sure about this?"}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  Deleting an entire column will result in deleting all of the
-                  tasks within it as well.
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                  CANCEL
-                </Button>
-                <Button
-                  onClick={() => {
-                    props.deleteColumn(props.column.id);
-                    handleClose();
-                  }}
-                  color="primary"
-                  autoFocus
-                >
-                  DELETE
-                </Button>
-              </DialogActions>
-            </Dialog>
-            <EditIcon onClick={() => setInputOpen(true)} />
+            <div className="column-first-half">
+              {inputOrText}
+              <EditIcon onClick={() => setInputOpen(true)} />
+              <DeleteOutlineIcon onClick={handleClickOpen} />
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Are you sure about this?"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    Deleting an entire column will result in deleting all of the
+                    tasks within it as well.
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    CANCEL
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      props.deleteColumn(props.column.id);
+                      handleClose();
+                    }}
+                    color="primary"
+                    autoFocus
+                  >
+                    DELETE
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+            <div className="column-badge">{props.tasks.length}</div>
           </div>
           <Droppable droppableId={props.column.id} type="task">
             {(provided, snapshot) => (
