@@ -67,8 +67,8 @@ export default function KanbanColumn(props) {
       </Button>
     </form>
   ) : (
-    <h2>{column}</h2>
-  );
+      <h2>{column}</h2>
+    );
 
   return (
     <Draggable draggableId={props.column.id} index={props.index}>
@@ -141,14 +141,18 @@ export default function KanbanColumn(props) {
                 ))}
                 {provided.placeholder}
                 <div className="task-btn-container">
-                  <div className="add-task-btn" onClick={props.toggleNewTask} id={props.id}>
-
-                    <Fab>
-                      {props.column.id === 'column-3' ? <Confetti active={props.confetti} config={confettiConfig} /> : ''}
-                        <AddIcon />
-                      </Fab>
-                  </div>
-                  <p>Add a task</p>
+                  {props.column.id === 'column-3' ? <Confetti active={props.confetti} config={confettiConfig} />
+                    : (
+                      <>
+                        <div className="add-task-btn" onClick={props.toggleNewTask} id={props.id}>
+                          <Fab>
+                            <AddIcon />
+                          </Fab>
+                        </div>
+                        <p>Add a task</p>
+                      </>
+                    )
+                  }
                 </div>
               </div>
             )}
