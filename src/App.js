@@ -134,7 +134,7 @@ class App extends React.Component {
   };
 
   checkCompleted() {
-    localStorage.setItem("state", JSON.stringify(this.state)
+    localStorage.setItem("state", JSON.stringify(this.state))
     const numCompleted = this.state.columns["column-3"].taskIds.length
     if (numCompleted % 5 === 0) {
       console.log("5 in completed!")
