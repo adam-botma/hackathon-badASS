@@ -213,11 +213,17 @@ header {
   .column {
     width: 95%;
     margin: auto;
+    margin-top: 2%;
+    height: auto;
+  }
+
+  .column-contents {
+    padding-bottom: 2%;
   }
 
   .add-col {
     width: 100%;
-    margin-top: 2%;
+    margin-top: 5%;
   }
 
   .add-column-btn {
