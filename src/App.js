@@ -244,16 +244,19 @@ class App extends React.Component {
   }
 
   editTask(id, newTask) {
-    this.setState((state) => ({
-      ...state,
-      tasks: {
-        ...state.tasks,
-        [id]: {
-          ...state.tasks[id],
-          title: newTask,
+    this.setState(
+      (state) => ({
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [id]: {
+            ...state.tasks[id],
+            title: newTask,
+          },
         },
-      },
-    }));
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   editContent(id, newContent) {
