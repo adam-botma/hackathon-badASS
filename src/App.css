@@ -457,6 +457,10 @@ header {
     height: 40%;
   }
 
+  .slide > p {
+    font-size: 0.8rem;
+  }
+
   .dots-container {
     position: absolute;
     bottom: 5%;
