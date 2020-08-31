@@ -96,6 +96,7 @@ header {
   align-items: center;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   height: calc(99vh - 70px);
 }
 
@@ -257,7 +258,6 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 2%;
 }
 
 .progress-number {
@@ -267,7 +267,7 @@ header {
 
 .progress-bar-container {
   width: 300px;
-  height: 2em;
+  height: 1.5em;
   background-color: gray;
   border-radius: 1em;
   position: relative;
@@ -279,7 +279,7 @@ header {
 
 .progress {
   position: absolute;
-  height: 1.5em;
+  height: 1em;
   top: 0.25em;
   bottom: 0.25em;
   width: 290px;
@@ -287,6 +287,17 @@ header {
   right: 5px;
   background-color: lightgray;
   border-radius: 0.75em;
+}
+
+.badge-container img {
+  width: 45px;
+  margin-right: 1rem;
+}
+
+.right-nav {
+  display: flex;
+  align-items: center;
+  margin: 0 0.5rem;
 }
 
 /* MOBILE RESPONSIVENESS */

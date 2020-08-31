@@ -28,7 +28,8 @@ const initialData = {
   },
   columnOrder: ['column-1', 'column-2', 'column-3'],
   project: 'BadASS Kanban',
-  welcomePage: true
+  welcomePage: true,
+  levelImage: ''
 };
 
 export default initialData;

@@ -45,15 +45,20 @@ export default function Header(props) {
           <EditIcon onClick={() => setInputOpen(true)} />
         </div>
       </div>
-      <div className="progress-info">
-        <div className="progress-number">
-          <span>{`${completedPercentage}% completed`}</span>
+      <div className="right-nav">
+        <div className="badge-container">
+          <img src={props.image} />
         </div>
-        <div className="progress-bar-container">
-          <div
-            style={{ width: `${completedFraction * 290}px` }}
-            className="progress"
-          ></div>
+        <div className="progress-info">
+          <div className="progress-number">
+            <span>{`${completedPercentage}% completed`}</span>
+          </div>
+          <div className="progress-bar-container">
+            <div
+              style={{ width: `${completedFraction * 290}px` }}
+              className="progress"
+            ></div>
+          </div>
         </div>
       </div>
     </header>
