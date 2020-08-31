@@ -5,7 +5,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Button from "@material-ui/core/Button";
 
 export default function TutorialModal(props) {
-  console.log(props);
   const sliderArr = [1, 2, 3, 4, 5, 6, 7];
   const [x, setX] = useState(0);
   const goLeft = () => {

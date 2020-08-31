@@ -476,7 +476,9 @@ class App extends React.Component {
 
   toggleTutorial() {
     if (this.state.tutorialDisplay === "block") {
-      this.setState({ tutorialDisplay: "none" });
+      this.setState({ tutorialDisplay: "none" }, () =>
+        localStorage.setItem("state", JSON.stringify(this.state))
+      );
     } else {
       this.setState({ tutorialDisplay: "block" });
     }
