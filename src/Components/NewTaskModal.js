@@ -56,7 +56,7 @@ export default function NewTaskModal(props) {
           value={props.newTaskDescription}
           onChange={props.taskDescriptionChange}
         />
-        <input onChange={props.taskImageChange} type="file"></input>
+        <input className="photo-input" onChange={props.taskImageChange} type="file"></input>
         <br />
         <Button variant="contained" color="primary" type="submit">
           Add Task

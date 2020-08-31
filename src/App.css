@@ -305,6 +305,10 @@ header {
   margin: 0 0.5rem;
 }
 
+.photo-input {
+  margin-bottom: 1rem;
+}
+
 /* MOBILE RESPONSIVENESS */
 
 /* Small devices (tablets, 768px and up) */
