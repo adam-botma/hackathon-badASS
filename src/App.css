@@ -289,6 +289,11 @@ header {
   border-radius: 0.75em;
 }
 
+.card-image {
+  width: 100%;
+  object-fit: contain;
+}
+
 .badge-container img {
   width: 45px;
   margin-right: 1rem;

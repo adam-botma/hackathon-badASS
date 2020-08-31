@@ -7,7 +7,6 @@ import KanbanColumn from "./Components/KanbanColumn";
 import NewTaskModal from "./Components/NewTaskModal";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
 import BadgeModal from "./Components/BadgeModal";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
@@ -24,6 +23,7 @@ class App extends React.Component {
       newTaskVisibility: false,
       newTaskName: "",
       newTaskDescription: "",
+      newTaskImage: "",
       newTaskColumnId: "null",
       badgeModal: false,
       level: 0,
@@ -40,11 +40,14 @@ class App extends React.Component {
     this.deleteTask = this.deleteTask.bind(this);
     this.taskNameChange = this.taskNameChange.bind(this);
     this.taskDescriptionChange = this.taskDescriptionChange.bind(this);
+    this.taskImageChange = this.taskImageChange.bind(this);
     this.toggleNewTask = this.toggleNewTask.bind(this);
     this.deleteColumn = this.deleteColumn.bind(this);
     this.newProject = this.newProject.bind(this);
     this.checkCompleted = this.checkCompleted.bind(this);
     this.closeBadgeModal = this.closeBadgeModal.bind(this);
+    this.getBase64 = this.getBase64.bind(this);
+    this.editImage = this.editImage.bind(this);
   }
 
   componentDidMount() {
@@ -187,6 +190,29 @@ class App extends React.Component {
     this.setState({ newTaskDescription: value });
   }
 
+  getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  taskImageChange(event) {
+    const file = event.target.files[0];
+    if (file.size > 500000) {
+      alert(
+        "File size is too big! Please choose a photo that is less than 500KB"
+      );
+      this.setState({ newTaskImage: "" });
+    } else {
+      this.getBase64(file).then((base64) => {
+        this.setState({ newTaskImage: base64 });
+      });
+    }
+  }
+
   addColumn(event) {
     event.preventDefault();
     const { columnOrder, newColumn } = this.state;
@@ -263,7 +289,12 @@ class App extends React.Component {
 
   addTask(event) {
     event.preventDefault();
-    const { newTaskName, newTaskDescription, newTaskColumnId } = this.state;
+    const {
+      newTaskName,
+      newTaskDescription,
+      newTaskColumnId,
+      newTaskImage,
+    } = this.state;
 
     //add to tasks
     let newTaskId = `task-${Object.keys(this.state.tasks).length + 1}`;
@@ -283,6 +314,7 @@ class App extends React.Component {
             id: newTaskId,
             title: newTaskName,
             content: newTaskDescription,
+            image: newTaskImage,
           },
         },
         columns: {
@@ -332,6 +364,32 @@ class App extends React.Component {
     }));
   }
 
+  editImage(id, event) {
+    const file = event.target.files[0];
+    if (file.size > 500000) {
+      alert(
+        "File size is too big! Please choose a photo that is less than 500KB"
+      );
+      this.setState({ newTaskImage: "" });
+    } else {
+      this.getBase64(file).then((base64) => {
+        this.setState(
+          (state) => ({
+            ...state,
+            tasks: {
+              ...state.tasks,
+              [id]: {
+                ...state.tasks[id],
+                image: base64,
+              },
+            },
+          }),
+          () => localStorage.setItem("state", JSON.stringify(this.state))
+        );
+      });
+    }
+  }
+
   editColumn(id, columnName) {
     this.setState(
       (state) => ({
@@ -363,11 +421,14 @@ class App extends React.Component {
     const name = this.state.newProjectValue;
 
     event.preventDefault();
-    this.setState((state) => ({
-      ...state,
-      project: name,
-      welcomePage: false,
-    }));
+    this.setState(
+      (state) => ({
+        ...state,
+        project: name,
+        welcomePage: false,
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   deleteTask(id, column) {
@@ -484,6 +545,7 @@ class App extends React.Component {
                         editTask={this.editTask}
                         editColumn={this.editColumn}
                         editContent={this.editContent}
+                        editImage={this.editImage}
                         key={columnId}
                         column={column}
                         tasks={tasks}
@@ -531,8 +593,10 @@ class App extends React.Component {
             addTask={this.addTask}
             newTaskName={this.state.newTaskName}
             taskNameChange={this.taskNameChange}
-            newTaskDescription={this.newTaskDescription}
+            newTaskDescription={this.state.newTaskDescription}
             taskDescriptionChange={this.taskDescriptionChange}
+            newTaskImage={this.state.newTaskImage}
+            taskImageChange={this.taskImageChange}
             toggleNewTask={this.toggleNewTask}
             visibility={this.state.newTaskVisibility}
           />

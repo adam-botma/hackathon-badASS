@@ -39,7 +39,7 @@ export default function NewTaskModal(props) {
           <TextField
             className={classes.root}
             id="outlined-basic"
-            label="Insert Title"
+            label="Title"
             variant="outlined"
             value={props.newTaskName}
             onChange={props.taskNameChange}
@@ -49,13 +49,15 @@ export default function NewTaskModal(props) {
         <TextField
           className={classes.root}
           id="outlined-multiline-static"
-          label="Multiline"
+          label="Description"
           multiline
           rows={4}
           variant="outlined"
           value={props.newTaskDescription}
           onChange={props.taskDescriptionChange}
         />
+        <input onChange={props.taskImageChange} type="file"></input>
+        <br />
         <Button variant="contained" color="primary" type="submit">
           Add Task
         </Button>

@@ -10,14 +10,11 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
-import Confetti from 'react-dom-confetti';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-
+import Confetti from "react-dom-confetti";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
 
 export default function KanbanColumn(props) {
-
-
   const [open, setOpen] = React.useState(false);
   const [inputOpen, setInputOpen] = useState(false);
   const [column, setColumn] = useState(props.column.title);
@@ -32,7 +29,7 @@ export default function KanbanColumn(props) {
     width: "15px",
     height: "15px",
     perspective: "803px",
-    colors: ["#FFB75E", "#f65c51", "#7689f5"]
+    colors: ["#FFB75E", "#f65c51", "#7689f5"],
   };
 
   const handleClickOpen = () => {
@@ -44,7 +41,14 @@ export default function KanbanColumn(props) {
   };
 
   const inputOrText = inputOpen ? (
-    <form noValidate autoComplete="off" className="edit-column-form">
+    <form
+      noValidate
+      autoComplete="off"
+      className="edit-column-form"
+      onSubmit={(event) => {
+        event.preventDefault();
+      }}
+    >
       <div className="edit-column-input">
         <TextField
           id="standard-basic"
@@ -67,8 +71,8 @@ export default function KanbanColumn(props) {
       </Button>
     </form>
   ) : (
-      <h2>{column}</h2>
-    );
+    <h2>{column}</h2>
+  );
 
   return (
     <Draggable draggableId={props.column.id} index={props.index}>
@@ -78,7 +82,10 @@ export default function KanbanColumn(props) {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <div className={`column-name-container ${props.column.color}`} {...provided.dragHandleProps}>
+          <div
+            className={`column-name-container ${props.column.color}`}
+            {...provided.dragHandleProps}
+          >
             {inputOrText}
             <div className="edit-column-name">
               <DeleteOutlineIcon onClick={handleClickOpen} />
@@ -95,12 +102,12 @@ export default function KanbanColumn(props) {
                   <DialogContentText id="alert-dialog-description">
                     Deleting an entire column will result in deleting all of the
                     tasks within it as well.
-                </DialogContentText>
+                  </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
                     CANCEL
-                </Button>
+                  </Button>
                   <Button
                     onClick={() => {
                       props.deleteColumn(props.column.id);
@@ -110,7 +117,7 @@ export default function KanbanColumn(props) {
                     autoFocus
                   >
                     DELETE
-                </Button>
+                  </Button>
                 </DialogActions>
               </Dialog>
               <EditIcon onClick={() => setInputOpen(true)} />
@@ -132,6 +139,7 @@ export default function KanbanColumn(props) {
                   <CardModal
                     deleteTask={props.deleteTask}
                     editTask={props.editTask}
+                    editImage={props.editImage}
                     currentColumn={props.column.id}
                     editContent={props.editContent}
                     key={task.id}
@@ -141,18 +149,22 @@ export default function KanbanColumn(props) {
                 ))}
                 {provided.placeholder}
                 <div className="task-btn-container">
-                  {props.column.id === 'column-3' ? <Confetti active={props.confetti} config={confettiConfig} />
-                    : (
-                      <>
-                        <div className="add-task-btn" onClick={props.toggleNewTask} id={props.id}>
-                          <Fab>
-                            <AddIcon />
-                          </Fab>
-                        </div>
-                        <p>Add a task</p>
-                      </>
-                    )
-                  }
+                  {props.column.id === "column-3" ? (
+                    <Confetti active={props.confetti} config={confettiConfig} />
+                  ) : (
+                    <>
+                      <div
+                        className="add-task-btn"
+                        onClick={props.toggleNewTask}
+                        id={props.id}
+                      >
+                        <Fab>
+                          <AddIcon />
+                        </Fab>
+                      </div>
+                      <p>Add a task</p>
+                    </>
+                  )}
                 </div>
               </div>
             )}
