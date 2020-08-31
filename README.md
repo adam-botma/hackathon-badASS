@@ -41,11 +41,11 @@ https://demo-badass-kanban.adambotma.com/
 
 ## Screenshots
 
-Homepage View:
+Moving Tasks Between Columns:
 
-![](server/public/images/homepage-view.gif)
+![](public/move-task-coulmn.gif)
 
-Product Pages:
+Completing a Task:
 
-![](server/public/images/product-details-1.gif)
+![](public/completed-task.gif)
 
