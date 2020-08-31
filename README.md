@@ -1,6 +1,6 @@
 # BadAss KanBan 
 
-A dynamic web application 
+The result of a weekend hackathon - BadAss Kanban is a web application for users to track their progress on tasks for a project (and enjoy the completion of each task). 
 
 
 ## Live Demo
