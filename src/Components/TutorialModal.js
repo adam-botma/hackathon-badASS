@@ -5,7 +5,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 export default function TutorialModal(props) {
   console.log(props);
-  const sliderArr = [1, 2, 3, 4, 5];
+  const sliderArr = [1, 2, 3, 4, 5, 6, 7];
   const [x, setX] = useState(0);
   const goLeft = () => {
     x === 0 ? setX(-100 * (sliderArr.length - 1)) : setX(x + 100);
@@ -40,10 +40,24 @@ export default function TutorialModal(props) {
                 <source src="add-task.mp4" type="video/ogg" />
                 Your browser does not support the video tag.
               </video>
-              <p>
+              <p style={{ padding: "1%" }}>
                 1. Click on the + button at the bottom of a column <br /> 2. Add
                 a title, and an optional description and image <br /> 3. Click
                 the Add Task Button
+              </p>
+            </div>
+            <div className="slide" style={{ transform: `translateX(${x}%)` }}>
+              <h1>Editing a task</h1>
+              <video className="tutorial-img" loop autoPlay muted>
+                <source src="editing.mp4" type="video/mp4" />
+                <source src="editing.mp4" type="video/ogg" />
+                Your browser does not support the video tag.
+              </video>
+              <p style={{ padding: "1%" }}>
+                To edit a task, just click on the task you want to change and
+                update whatever information necessary. Then you can simply click
+                out of the modal.
+                <br />
               </p>
             </div>
             <div className="slide" style={{ transform: `translateX(${x}%)` }}>
@@ -53,7 +67,7 @@ export default function TutorialModal(props) {
                 <source src="create-column.mp4" type="video/ogg" />
                 Your browser does not support the video tag.
               </video>
-              <p>
+              <p style={{ padding: "1%" }}>
                 1. Click on the + button to the right of the last column
                 <br /> 2. Add Add a column title <br /> 3. Press Enter
               </p>
@@ -65,9 +79,34 @@ export default function TutorialModal(props) {
                 <source src="dragging.mp4" type="video/ogg" />
                 Your browser does not support the video tag.
               </video>
-              <p>
+              <p style={{ padding: "1%" }}>
                 You can drag tasks within a column, drag tasks between columns,
                 and drag the columns themselves
+                <br />
+              </p>
+            </div>
+            <div className="slide" style={{ transform: `translateX(${x}%)` }}>
+              <h1>Completing Tasks</h1>
+              <video className="tutorial-img" loop autoPlay muted>
+                <source src="completing.mp4" type="video/mp4" />
+                <source src="completing.mp4" type="video/ogg" />
+                Your browser does not support the video tag.
+              </video>
+              <p style={{ padding: "1%" }}>
+                When you put a task into the complete column, your progress bar
+                will fill up and you'll be rewarded with confetti!
+                <br />
+              </p>
+            </div>
+            <div className="slide" style={{ transform: `translateX(${x}%)` }}>
+              <h1>Rewards</h1>
+              <video className="tutorial-img" loop autoPlay muted>
+                <source src="level-up.mp4" type="video/mp4" />
+                <source src="level-up.mp4" type="video/ogg" />
+                Your browser does not support the video tag.
+              </video>
+              <p style={{ padding: "1%" }}>
+                For every 5 tasks you finish, you level up and gain a badge!
                 <br />
               </p>
             </div>

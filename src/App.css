@@ -414,7 +414,6 @@ header {
   height: 90%;
   transition: 0.5s;
   overflow: hidden;
-  background-color: grey;
   display: flex;
   justify-content: center;
   flex-direction: column;
