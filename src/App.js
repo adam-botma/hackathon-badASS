@@ -155,25 +155,34 @@ class App extends React.Component {
     const numCompleted = this.state.columns["column-3"].taskIds.length;
     if (numCompleted % 5 === 0 && numCompleted < 51) {
       if (numCompleted > 45) {
-        this.setState((state) => ({
-          ...state,
-          badgeModal: true,
-          level: numCompleted / 5,
-          levelImage: 'super-star.svg'
-        }), () => localStorage.setItem("state", JSON.stringify(this.state)));
+        this.setState(
+          (state) => ({
+            ...state,
+            badgeModal: true,
+            level: numCompleted / 5,
+            levelImage: "super-star.svg",
+          }),
+          () => localStorage.setItem("state", JSON.stringify(this.state))
+        );
       } else {
-        this.setState((state) => ({
-          ...state,
-          badgeModal: true,
-          level: numCompleted / 5,
-          levelImage: `level-${numCompleted / 5}.svg`
-        }), () => localStorage.setItem("state", JSON.stringify(this.state)));
+        this.setState(
+          (state) => ({
+            ...state,
+            badgeModal: true,
+            level: numCompleted / 5,
+            levelImage: `level-${numCompleted / 5}.svg`,
+          }),
+          () => localStorage.setItem("state", JSON.stringify(this.state))
+        );
       }
     } else {
-      this.setState((state) => ({
-        ...state,
-        confetti: true,
-      }), () => localStorage.setItem("state", JSON.stringify(this.state)));
+      this.setState(
+        (state) => ({
+          ...state,
+          confetti: true,
+        }),
+        () => localStorage.setItem("state", JSON.stringify(this.state))
+      );
     }
   }
 
@@ -323,13 +332,14 @@ class App extends React.Component {
           [newTaskColumnId]: {
             ...state.columns[newTaskColumnId],
             id: newTaskColumnId,
-            taskIds: updatedColumnTaskIds
+            taskIds: updatedColumnTaskIds,
           },
         },
         newTaskVisibility: false,
         newTaskName: "",
         newTaskDescription: "",
         newTaskColumnId: "null",
+        newTaskImage: "",
       }),
       () => localStorage.setItem("state", JSON.stringify(this.state))
     );
@@ -465,10 +475,13 @@ class App extends React.Component {
   }
 
   closeBadgeModal() {
-    this.setState((state) => ({
-      ...state,
-      badgeModal: false,
-    }), () => localStorage.setItem("state", JSON.stringify(this.state)));
+    this.setState(
+      (state) => ({
+        ...state,
+        badgeModal: false,
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   toggleTutorial() {
