@@ -396,6 +396,9 @@ header {
   position: absolute;
   top: 0;
   right: 0;
+
+.photo-input {
+  margin-bottom: 1rem;
 }
 
 /* MOBILE RESPONSIVENESS */

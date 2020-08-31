@@ -27,14 +27,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleModal(props) {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
 
   const [open, setOpen] = React.useState(false);
-
-  // console.log(props.title)
-
-  // console.log(props.task.title)
-
   const [title, setTitle] = React.useState(props.task.title);
   const [content, setContent] = React.useState(props.task.content);
 
@@ -84,6 +78,7 @@ export default function SimpleModal(props) {
           }}
         />
         <input
+          className="photo-input"
           onChange={(event) => props.editImage(props.task.id, event)}
           type="file"
         ></input>

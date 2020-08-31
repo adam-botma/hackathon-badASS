@@ -153,28 +153,27 @@ class App extends React.Component {
 
   checkCompleted() {
     const numCompleted = this.state.columns["column-3"].taskIds.length;
-    console.log("running", numCompleted);
     if (numCompleted % 5 === 0 && numCompleted < 51) {
       if (numCompleted > 45) {
         this.setState((state) => ({
           ...state,
           badgeModal: true,
           level: numCompleted / 5,
-          levelImage: "super-star.svg",
-        }));
+          levelImage: 'super-star.svg'
+        }), () => localStorage.setItem("state", JSON.stringify(this.state)));
       } else {
         this.setState((state) => ({
           ...state,
           badgeModal: true,
           level: numCompleted / 5,
-          levelImage: `level-${numCompleted / 5}.svg`,
-        }));
+          levelImage: `level-${numCompleted / 5}.svg`
+        }), () => localStorage.setItem("state", JSON.stringify(this.state)));
       }
     } else {
       this.setState((state) => ({
         ...state,
         confetti: true,
-      }));
+      }), () => localStorage.setItem("state", JSON.stringify(this.state)));
     }
   }
 
@@ -261,7 +260,6 @@ class App extends React.Component {
     const currentColumnOrder = Array.from(this.state.columnOrder);
 
     currentColumnOrder.splice(currentColumnOrder.indexOf(id), 1);
-    console.log(currentColumnOrder);
 
     const newState = {
       ...this.state,
@@ -325,8 +323,7 @@ class App extends React.Component {
           [newTaskColumnId]: {
             ...state.columns[newTaskColumnId],
             id: newTaskColumnId,
-            title: newTaskColumnId,
-            taskIds: updatedColumnTaskIds,
+            taskIds: updatedColumnTaskIds
           },
         },
         newTaskVisibility: false,
@@ -471,7 +468,7 @@ class App extends React.Component {
     this.setState((state) => ({
       ...state,
       badgeModal: false,
-    }));
+    }), () => localStorage.setItem("state", JSON.stringify(this.state)));
   }
 
   toggleTutorial() {
