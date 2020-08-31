@@ -6,13 +6,12 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import KanbanColumn from "./Components/KanbanColumn";
 import NewTaskModal from "./Components/NewTaskModal";
 import TextField from "@material-ui/core/TextField";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import BadgeModal from "./Components/BadgeModal";
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import CloseIcon from '@material-ui/icons/Close';
-
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import CloseIcon from "@material-ui/icons/Close";
 
 class App extends React.Component {
   constructor(props) {
@@ -139,28 +138,28 @@ class App extends React.Component {
       confetti: false,
     };
     this.setState(newState, () => {
-      localStorage.setItem("state", JSON.stringify(this.state))
-      if (destination.droppableId === 'column-3') {
-        this.checkCompleted()
+      localStorage.setItem("state", JSON.stringify(this.state));
+      if (destination.droppableId === "column-3") {
+        this.checkCompleted();
       }
     });
   };
 
   checkCompleted() {
-    const numCompleted = this.state.columns["column-3"].taskIds.length
-    console.log("running", numCompleted)
+    const numCompleted = this.state.columns["column-3"].taskIds.length;
+    console.log("running", numCompleted);
     if (numCompleted % 5 === 0) {
-      console.log("5 in completed!")
-      this.setState(state => ({
+      console.log("5 in completed!");
+      this.setState((state) => ({
         ...state,
         badgeModal: true,
-        level: numCompleted / 5
-      }))
+        level: numCompleted / 5,
+      }));
     } else {
-      this.setState(state => ({
+      this.setState((state) => ({
         ...state,
-        confetti: true
-      }))
+        confetti: true,
+      }));
     }
   }
 
@@ -183,9 +182,9 @@ class App extends React.Component {
     event.preventDefault();
     const { columnOrder, newColumn } = this.state;
 
-    const colors = ['red', 'yellow', 'blue']
+    const colors = ["red", "yellow", "blue"];
 
-    const randomColor = Math.floor(Math.random() * colors.length)
+    const randomColor = Math.floor(Math.random() * colors.length);
 
     //Addint to columnOrder
     let newColumnOrder = columnOrder.slice();
@@ -202,7 +201,7 @@ class App extends React.Component {
             id: newColumn,
             title: newColumn,
             taskIds: [],
-            color: colors[randomColor]
+            color: colors[randomColor],
           },
         },
         columnOrder: newColumnOrder,
@@ -396,10 +395,10 @@ class App extends React.Component {
   }
 
   closeBadgeModal() {
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
-      badgeModal: false
-    }))
+      badgeModal: false,
+    }));
   }
 
   render() {
@@ -408,7 +407,7 @@ class App extends React.Component {
     if (formVisibility === "visible") {
       addButton = <CloseIcon />;
     }
-    const messageVisible = formVisibility === "visible" ? '' : 'Add a column'
+    const messageVisible = formVisibility === "visible" ? "" : "Add a column";
     if (this.state.welcomePage) {
       return (
         <div className="app-splash">
@@ -437,8 +436,17 @@ class App extends React.Component {
     } else {
       return (
         <div>
-          <BadgeModal open={this.state.badgeModal} close={this.closeBadgeModal} level={this.state.level} />
-          <Header project={this.state.project} editProject={this.editProject} />
+          <BadgeModal
+            open={this.state.badgeModal}
+            close={this.closeBadgeModal}
+            level={this.state.level}
+          />
+          <Header
+            project={this.state.project}
+            editProject={this.editProject}
+            completed={this.state.columns["column-3"]}
+            tasks={this.state.tasks}
+          />
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Droppable
               droppableId="columns"
@@ -477,9 +485,7 @@ class App extends React.Component {
                   {provided.placeholder}
                   <div className="add-col">
                     <div className="add-column-btn">
-                      <Fab onClick={this.toggleFormVisibility}>
-                        {addButton}
-                      </Fab>
+                      <Fab onClick={this.toggleFormVisibility}>{addButton}</Fab>
                       <p>{messageVisible}</p>
                     </div>
                     <div style={{ visibility: formVisibility }}>
@@ -495,9 +501,13 @@ class App extends React.Component {
                           onChange={this.handleChange}
                         />
                         <div className="add-column-btn-wrapper">
-                          <Button variant="contained" color="primary" type="submit">
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                          >
                             Enter
-                        </Button>
+                          </Button>
                         </div>
                       </form>
                     </div>
