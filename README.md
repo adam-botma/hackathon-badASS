@@ -13,8 +13,7 @@ https://demo-badass-kanban.adambotma.com/
   * CSS3
   * HTML5
   * Material-UI
-  *
-
+  
 
 ## Functionality Overview 
   * User can CRUD a task
