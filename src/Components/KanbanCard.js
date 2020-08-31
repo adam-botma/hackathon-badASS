@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
 import { Typography } from "@material-ui/core";
 
 export default function KanbanCard(props) {

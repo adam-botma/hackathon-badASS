@@ -7,7 +7,6 @@ import KanbanColumn from "./Components/KanbanColumn";
 import NewTaskModal from "./Components/NewTaskModal";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
 import BadgeModal from "./Components/BadgeModal";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
@@ -354,11 +353,14 @@ class App extends React.Component {
     const name = this.state.newProjectValue;
 
     event.preventDefault();
-    this.setState((state) => ({
-      ...state,
-      project: name,
-      welcomePage: false,
-    }));
+    this.setState(
+      (state) => ({
+        ...state,
+        project: name,
+        welcomePage: false,
+      }),
+      () => localStorage.setItem("state", JSON.stringify(this.state))
+    );
   }
 
   deleteTask(id, column) {

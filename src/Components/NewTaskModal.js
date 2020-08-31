@@ -38,7 +38,7 @@ export default function NewTaskModal(props) {
           <TextField
             className={classes.root}
             id="outlined-basic"
-            label="Insert Title"
+            label="Title"
             variant="outlined"
             value={props.newTaskName}
             onChange={props.taskNameChange}
@@ -48,7 +48,7 @@ export default function NewTaskModal(props) {
         <TextField
           className={classes.root}
           id="outlined-multiline-static"
-          label="Multiline"
+          label="Description"
           multiline
           rows={4}
           variant="outlined"

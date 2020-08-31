@@ -55,7 +55,7 @@ export default function SimpleModal(props) {
           <TextField
             className={classes.root}
             id="outlined-basic"
-            label="Insert Title"
+            label="Title"
             variant="outlined"
             defaultValue={title}
             onChange={(event) => {
@@ -68,7 +68,7 @@ export default function SimpleModal(props) {
         <TextField
           className={classes.root}
           id="outlined-multiline-static"
-          label="Multiline"
+          label="Description"
           multiline
           rows={4}
           defaultValue={content}
