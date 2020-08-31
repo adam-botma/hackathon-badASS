@@ -55,7 +55,11 @@ export default function NewTaskModal(props) {
           value={props.newTaskDescription}
           onChange={props.taskDescriptionChange}
         />
-        <button type="submit">Add Task</button>
+        <input onChange={props.taskImageChange} type="file"></input>
+        <br />
+        <button style={{ marginTop: "2%" }} type="submit">
+          Add Task
+        </button>
       </form>
       <div onClick={props.toggleNewTask}>
         <DeleteOutlineIcon />

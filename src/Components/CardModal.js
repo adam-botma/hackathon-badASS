@@ -50,7 +50,12 @@ export default function SimpleModal(props) {
 
   const body = (
     <div className={classes.paper}>
-      <form className={classes.root} noValidate autoComplete="off">
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={(event) => event.preventDefault()}
+      >
         <div>
           <TextField
             className={classes.root}
@@ -78,6 +83,7 @@ export default function SimpleModal(props) {
             props.editContent(props.task.id, event.target.value);
           }}
         />
+        <input onChange={props.taskImageChange} type="file"></input>
       </form>
       <DeleteOutlineIcon
         onClick={() => props.deleteTask(props.task.id, props.currentColumn)}
@@ -97,7 +103,11 @@ export default function SimpleModal(props) {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <KanbanCard handleOpen={handleOpen} title={props.task.title} />
+          <KanbanCard
+            handleOpen={handleOpen}
+            title={props.task.title}
+            image={props.task.image}
+          />
           <Modal
             open={open}
             onClose={handleClose}
