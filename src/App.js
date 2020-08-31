@@ -151,13 +151,22 @@ class App extends React.Component {
   checkCompleted() {
     const numCompleted = this.state.columns["column-3"].taskIds.length;
     console.log("running", numCompleted);
-    if (numCompleted % 5 === 0) {
-      console.log("5 in completed!");
-      this.setState((state) => ({
-        ...state,
-        badgeModal: true,
-        level: numCompleted / 5,
-      }));
+    if (numCompleted % 5 === 0 && numCompleted < 51) {
+      if (numCompleted > 45) {
+        this.setState((state) => ({
+          ...state,
+          badgeModal: true,
+          level: numCompleted / 5,
+          levelImage: 'super-star.svg'
+        }));
+      } else {
+        this.setState((state) => ({
+          ...state,
+          badgeModal: true,
+          level: numCompleted / 5,
+          levelImage: `level-${numCompleted / 5}.svg`
+        }));
+      }
     } else {
       this.setState((state) => ({
         ...state,
@@ -501,8 +510,10 @@ class App extends React.Component {
             open={this.state.badgeModal}
             close={this.closeBadgeModal}
             level={this.state.level}
+            image={this.state.levelImage}
           />
           <Header
+            image={this.state.levelImage}
             project={this.state.project}
             editProject={this.editProject}
             completed={this.state.columns["column-3"]}
