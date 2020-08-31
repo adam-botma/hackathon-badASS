@@ -12,7 +12,14 @@ export default function Header(props) {
   const [inputOpen, setInputOpen] = useState(false);
   const [project, setProject] = useState(props.project);
   const inputOrText = inputOpen ? (
-    <form noValidate autoComplete="off" className="edit-project-form">
+    <form
+      noValidate
+      autoComplete="off"
+      className="edit-project-form"
+      onSubmit={(event) => {
+        event.preventDefault();
+      }}
+    >
       <div className="edit-project-input">
         <TextField
           id="standard-basic"
