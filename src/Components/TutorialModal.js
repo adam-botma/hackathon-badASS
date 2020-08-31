@@ -5,7 +5,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Button from "@material-ui/core/Button";
 
 export default function TutorialModal(props) {
-  const sliderArr = [1, 2, 3, 4, 5, 6, 7];
+  const sliderArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [x, setX] = useState(0);
   const goLeft = () => {
     x === 0 ? setX(-100 * (sliderArr.length - 1)) : setX(x + 100);
@@ -42,8 +42,8 @@ export default function TutorialModal(props) {
               </video>
               <p style={{ padding: "1%" }}>
                 1. Click on the + button at the bottom of a column <br /> 2. Add
-                a title, and an optional description and image <br /> 3. Click
-                the Add Task Button
+                a title. You can also add an optional description and image.{" "}
+                <br /> 3. Click the "Add Task" button.
               </p>
             </div>
             <div className="slide" style={{ transform: `translateX(${x}%)` }}>
@@ -55,8 +55,8 @@ export default function TutorialModal(props) {
               </video>
               <p style={{ padding: "1%" }}>
                 To edit a task, just click on the task you want to change and
-                update whatever information necessary. Then you can simply click
-                out of the modal.
+                update whatever information necessary. Then, you can simply
+                click out of the modal.
                 <br />
               </p>
             </div>
@@ -69,7 +69,36 @@ export default function TutorialModal(props) {
               </video>
               <p style={{ padding: "1%" }}>
                 1. Click on the + button to the right of the last column
-                <br /> 2. Add Add a column title <br /> 3. Press Enter
+                <br /> 2. Add a column title <br /> 3. Press "Enter".
+              </p>
+            </div>
+            <div className="slide" style={{ transform: `translateX(${x}%)` }}>
+              <h1>How to edit the project name or any column name</h1>
+              <video className="tutorial-img" loop autoPlay muted>
+                <source src="edit-project-column.mp4" type="video/mp4" />
+                <source src="edit-project-column.mp4" type="video/ogg" />
+                Your browser does not support the video tag.
+              </video>
+              <p style={{ padding: "1%" }}>
+                To edit your project name or any column name, simply hover over
+                it and click the edit icon. Update the name and click "Apply".
+              </p>
+            </div>
+            <div className="slide" style={{ transform: `translateX(${x}%)` }}>
+              <h1>Deleting</h1>
+              <video className="tutorial-img" loop autoPlay muted>
+                <source src="deleting.mp4" type="video/mp4" />
+                <source src="deleting.mp4" type="video/ogg" />
+                Your browser does not support the video tag.
+              </video>
+              <p style={{ padding: "1%" }}>
+                You can delete a single task by clicking on it and then clicking
+                on the trash can icon.
+                <br />
+                You can also delete an entire column by hovering over the column
+                name and clicking the trash can icon. If you try to delete a
+                column, you will get a warning stating that you will also delete
+                all of the tasks within it.
               </p>
             </div>
             <div className="slide" style={{ transform: `translateX(${x}%)` }}>
@@ -81,7 +110,7 @@ export default function TutorialModal(props) {
               </video>
               <p style={{ padding: "1%" }}>
                 You can drag tasks within a column, drag tasks between columns,
-                and drag the columns themselves
+                and drag the columns themselves.
                 <br />
               </p>
             </div>
