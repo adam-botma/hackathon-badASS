@@ -519,7 +519,7 @@ class App extends React.Component {
         <div>
           <TutorialModal
             display={this.state.tutorialDisplay}
-            toggleTutorial={this.state.toggleTutorial}
+            toggleTutorial={this.toggleTutorial}
           />
           <BadgeModal
             open={this.state.badgeModal}

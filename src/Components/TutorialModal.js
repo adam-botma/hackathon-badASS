@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Fab from "@material-ui/core/Fab";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import Button from "@material-ui/core/Button";
 
 export default function TutorialModal(props) {
   console.log(props);
@@ -129,6 +130,13 @@ export default function TutorialModal(props) {
               ></span>
             );
           })}
+          <Button
+            className="tutorial-button"
+            variant="contained"
+            onClick={props.toggleTutorial}
+          >
+            I got it
+          </Button>
         </div>
       </div>
     </div>
