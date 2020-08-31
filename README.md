@@ -18,6 +18,8 @@ https://demo-badass-kanban.adambotma.com/
 ## Functionality Overview 
   * User can CRUD a task
   * User can CRUD a column
+  * User can add photos to tasks
+  * User can watch intro videos to understand how the app works
   * User can order tasks within a column by dragging tasks
   * User can move tasks to new columns by dragging them
   * User can rearrange the columns order by dragging them 
