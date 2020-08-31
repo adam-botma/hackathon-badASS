@@ -6,8 +6,13 @@ import Button from "@material-ui/core/Button";
 export default function Header(props) {
   const completedTasks = props.completed.taskIds.length;
   const totalTasks = Object.keys(props.tasks).length;
-  const completedFraction = completedTasks / totalTasks;
-  const completedPercentage = Math.round(completedFraction * 100);
+  let completedFraction = completedTasks / totalTasks;
+  let completedPercentage = Math.round(completedFraction * 100);
+
+  if (totalTasks === 0) {
+    completedFraction = 0;
+    completedPercentage = 0;
+  }
 
   const [inputOpen, setInputOpen] = useState(false);
   const [project, setProject] = useState(props.project);
