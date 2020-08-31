@@ -30,9 +30,13 @@ https://demo-badass-kanban.adambotma.com/
 ## Get Started with the app
 1. Clone this repo
 2. install dependencies
-   ~~~ npm install ~~~
+   ~~~ 
+   npm install
+   ~~~
 3. Run the Dev Server
-   ~~~ npm start ~~~ 
+   ~~~ 
+   npm start 
+   ~~~ 
 
 
 
