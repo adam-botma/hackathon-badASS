@@ -11,6 +11,7 @@ import BadgeModal from "./Components/BadgeModal";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
+import TutorialModal from "./Components/TutorialModal";
 
 class App extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class App extends React.Component {
       badgeModal: false,
       level: 0,
       confetti: false,
+      tutorialDisplay: "block",
     };
     this.addColumn = this.addColumn.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -48,6 +50,7 @@ class App extends React.Component {
     this.closeBadgeModal = this.closeBadgeModal.bind(this);
     this.getBase64 = this.getBase64.bind(this);
     this.editImage = this.editImage.bind(this);
+    this.toggleTutorial = this.toggleTutorial.bind(this);
   }
 
   componentDidMount() {
@@ -157,14 +160,14 @@ class App extends React.Component {
           ...state,
           badgeModal: true,
           level: numCompleted / 5,
-          levelImage: 'super-star.svg'
+          levelImage: "super-star.svg",
         }));
       } else {
         this.setState((state) => ({
           ...state,
           badgeModal: true,
           level: numCompleted / 5,
-          levelImage: `level-${numCompleted / 5}.svg`
+          levelImage: `level-${numCompleted / 5}.svg`,
         }));
       }
     } else {
@@ -471,6 +474,14 @@ class App extends React.Component {
     }));
   }
 
+  toggleTutorial() {
+    if (this.state.tutorialDisplay === "block") {
+      this.setState({ tutorialDisplay: "none" });
+    } else {
+      this.setState({ tutorialDisplay: "block" });
+    }
+  }
+
   render() {
     const { formVisibility } = this.state;
     let addButton = <AddIcon />;
@@ -506,6 +517,10 @@ class App extends React.Component {
     } else {
       return (
         <div>
+          <TutorialModal
+            display={this.state.tutorialDisplay}
+            toggleTutorial={this.state.toggleTutorial}
+          />
           <BadgeModal
             open={this.state.badgeModal}
             close={this.closeBadgeModal}
