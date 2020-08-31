@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,7 +56,9 @@ export default function NewTaskModal(props) {
           value={props.newTaskDescription}
           onChange={props.taskDescriptionChange}
         />
-        <button type="submit">Add Task</button>
+        <Button variant="contained" color="primary" type="submit">
+          Add Task
+        </Button>
       </form>
       <div onClick={props.toggleNewTask}>
         <DeleteOutlineIcon />
