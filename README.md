@@ -23,7 +23,7 @@ https://demo-badass-kanban.adambotma.com/
   * User can rearrange the columns order by dragging them 
   * User can see progress of overall task completion via a progress bar
   * User can receive success badges for every 5 completed tasks
-  * User can enjoy a small confetti (and easy to clean) celebration with each completed task 
+  * User can enjoy a small (and easy to clean) confetti celebration with each completed task 
   
 
 ## Get Started with the app
