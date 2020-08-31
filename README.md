@@ -43,7 +43,7 @@ https://demo-badass-kanban.adambotma.com/
 
 Moving Tasks Between Columns:
 
-![](public/move-task-coulmn.gif)
+![](public/move-task-column.gif)
 
 Completing a Task:
 
