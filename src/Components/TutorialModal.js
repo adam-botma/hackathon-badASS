@@ -31,7 +31,7 @@ export default function TutorialModal(props) {
             <div className="slide" style={{ transform: `translateX(${x}%)` }}>
               <h1>Welcome to BadASS Kanban</h1>
               <img className="tutorial-img" src="welcome.png" alt="welcome" />
-              <p>Let's Get Started</p>
+              <p>Let's get started</p>
             </div>
             <div className="slide" style={{ transform: `translateX(${x}%)` }}>
               <h1>How to create a new task</h1>
