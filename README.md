@@ -1,6 +1,6 @@
 # BadAss KanBan 
 
-The result of a weekend hackathon - BadAss Kanban is a web application for users to track their progress on tasks for a project (and enjoy the completion of each task). 
+The result of a weekend hackathon - BadASS Kanban is a web application for users to track their progress on tasks for a project (and enjoy the completion of each task). 
 
 
 ## Live Demo
@@ -27,12 +27,14 @@ https://demo-badass-kanban.adambotma.com/
   * User can enjoy a small confetti (and easy to clean) celebration with each completed task 
   
 
-## Further Development Plans 
-* Add image carousel to product details page to show multiple product images.
-* Re-style the product listing page to have a more magazine style layout. 
-* Create functionality for users to remove items from their shopping bag. 
-* Improve mobile layout for the view shopping bag page.
-* Improve empty shopping bag page
+## Get Started with the app
+1. Clone this repo
+2. install dependencies
+   ~~~ npm install ~~~
+3. Run the Dev Server
+   ~~~ npm start ~~~ 
+
+
 
 ## Screenshots
 
