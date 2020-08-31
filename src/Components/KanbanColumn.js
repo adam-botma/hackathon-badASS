@@ -139,6 +139,7 @@ export default function KanbanColumn(props) {
                   <CardModal
                     deleteTask={props.deleteTask}
                     editTask={props.editTask}
+                    editImage={props.editImage}
                     currentColumn={props.column.id}
                     editContent={props.editContent}
                     key={task.id}

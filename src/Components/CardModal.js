@@ -83,7 +83,10 @@ export default function SimpleModal(props) {
             props.editContent(props.task.id, event.target.value);
           }}
         />
-        <input onChange={props.taskImageChange} type="file"></input>
+        <input
+          onChange={(event) => props.editImage(props.task.id, event)}
+          type="file"
+        ></input>
       </form>
       <DeleteOutlineIcon
         onClick={() => props.deleteTask(props.task.id, props.currentColumn)}

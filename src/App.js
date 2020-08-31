@@ -47,6 +47,7 @@ class App extends React.Component {
     this.checkCompleted = this.checkCompleted.bind(this);
     this.closeBadgeModal = this.closeBadgeModal.bind(this);
     this.getBase64 = this.getBase64.bind(this);
+    this.editImage = this.editImage.bind(this);
   }
 
   componentDidMount() {
@@ -354,6 +355,32 @@ class App extends React.Component {
     }));
   }
 
+  editImage(id, event) {
+    const file = event.target.files[0];
+    if (file.size > 500000) {
+      alert(
+        "File size is too big! Please choose a photo that is less than 500KB"
+      );
+      this.setState({ newTaskImage: "" });
+    } else {
+      this.getBase64(file).then((base64) => {
+        this.setState(
+          (state) => ({
+            ...state,
+            tasks: {
+              ...state.tasks,
+              [id]: {
+                ...state.tasks[id],
+                image: base64,
+              },
+            },
+          }),
+          () => localStorage.setItem("state", JSON.stringify(this.state))
+        );
+      });
+    }
+  }
+
   editColumn(id, columnName) {
     this.setState(
       (state) => ({
@@ -507,6 +534,7 @@ class App extends React.Component {
                         editTask={this.editTask}
                         editColumn={this.editColumn}
                         editContent={this.editContent}
+                        editImage={this.editImage}
                         key={columnId}
                         column={column}
                         tasks={tasks}
