@@ -226,6 +226,11 @@ header {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
+  max-height: 200px;
+}
+
+.badge-image img {
+  max-height: 200px;
 }
 
 .badge-modal-header {
