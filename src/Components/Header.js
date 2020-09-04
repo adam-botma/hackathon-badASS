@@ -59,7 +59,7 @@ export default function Header(props) {
       </div>
       <div className="right-nav">
         <div className="badge-container">
-          <img src={props.image} />
+          <img src={props.image} alt={props.image} />
         </div>
         <div className="progress-info">
           <div className="progress-number">

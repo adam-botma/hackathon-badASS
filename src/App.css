@@ -430,6 +430,7 @@ header {
   .column-container {
     flex-wrap: wrap;
     margin-top: 1%;
+    overflow-y: auto;
   }
 
   .column {
