@@ -47,6 +47,7 @@ export default function KanbanColumn(props) {
       className="edit-column-form"
       onSubmit={(event) => {
         event.preventDefault();
+        setInputOpen(false);
       }}
     >
       <div className="edit-column-input">
