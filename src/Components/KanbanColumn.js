@@ -15,6 +15,7 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 
 export default function KanbanColumn(props) {
+  console.log(props);
   const [open, setOpen] = React.useState(false);
   const [inputOpen, setInputOpen] = useState(false);
   const [column, setColumn] = useState(props.column.title);
@@ -89,7 +90,11 @@ export default function KanbanColumn(props) {
           >
             {inputOrText}
             <div className="edit-column-name">
-              <DeleteOutlineIcon onClick={handleClickOpen} />
+              <EditIcon onClick={() => setInputOpen(true)} />
+              <DeleteOutlineIcon
+                onClick={handleClickOpen}
+                style={{ display: props.id === "column-3" ? "none" : "null" }}
+              />
               <Dialog
                 open={open}
                 onClose={handleClose}
@@ -121,7 +126,6 @@ export default function KanbanColumn(props) {
                   </Button>
                 </DialogActions>
               </Dialog>
-              <EditIcon onClick={() => setInputOpen(true)} />
             </div>
             <div className="column-badge">{props.tasks.length}</div>
           </div>
