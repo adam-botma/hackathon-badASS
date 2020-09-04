@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import KanbanCard from "./KanbanCard";
 import { Draggable } from "react-beautiful-dnd";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -48,7 +49,10 @@ export default function SimpleModal(props) {
         className={classes.root}
         noValidate
         autoComplete="off"
-        onSubmit={(event) => event.preventDefault()}
+        onSubmit={(event) => {
+          event.preventDefault();
+          handleClose();
+        }}
       >
         <div>
           <TextField
@@ -82,6 +86,15 @@ export default function SimpleModal(props) {
           onChange={(event) => props.editImage(props.task.id, event)}
           type="file"
         ></input>
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          style={{ textAlign: "center" }}
+        >
+          Edit Task
+        </Button>
       </form>
       <DeleteOutlineIcon
         onClick={() => props.deleteTask(props.task.id, props.currentColumn)}
